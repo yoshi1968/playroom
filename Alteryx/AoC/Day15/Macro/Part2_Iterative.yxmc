@@ -3,7 +3,7 @@
   <Nodes>
     <Node ToolID="1">
       <GuiSettings Plugin="AlteryxBasePluginsGui.MacroInput.MacroInput">
-        <Position x="138" y="150" />
+        <Position x="66" y="78" />
       </GuiSettings>
       <Properties>
         <Configuration>
@@ -16,13 +16,13 @@
             <Configuration>
               <NumRows value="1" />
               <Fields>
-                <Field name="map" />
+                <Field name="rows" />
                 <Field name="move" />
               </Fields>
               <Data>
                 <r>
-                  <c>##############,##......##..##,##..........##,##....[][]@.##,##....[]....##,##..........##,##############</c>
-                  <c>&lt;vv&lt;&lt;^^&lt;&lt;^^</c>
+                  <c>############## ##......##..## ##..........## ##...[][]@..## ##....[]....## ##..........## ##############</c>
+                  <c>vv&lt;&lt;^^&lt;&lt;^^</c>
                 </r>
               </Data>
             </Configuration>
@@ -36,7 +36,7 @@
         </Annotation>
         <MetaInfo connection="Output">
           <RecordInfo>
-            <Field name="map" size="2147483647" source="TextInput:" type="V_String" />
+            <Field name="rows" size="2147483647" source="TextInput:" type="V_String" />
             <Field name="move" size="2147483647" source="TextInput:" type="V_String" />
           </RecordInfo>
         </MetaInfo>
@@ -57,126 +57,127 @@
     </Node>
     <Node ToolID="3">
       <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
-        <Position x="234" y="150" />
+        <Position x="186" y="78" />
       </GuiSettings>
       <Properties>
         <Configuration>
           <FormulaFields>
-            <FormulaField expression="[Engine.IterationNumber]" field="IterationNo" size="2" type="Int16" enabled="true" />
-            <FormulaField expression="Left([move], 1)" field="thisMove" size="1073741823" type="V_WString" enabled="true" />
-            <FormulaField expression="Substring([move],1,Length([move]))" field="move" size="2147483647" type="V_String" enabled="true" />
+            <FormulaField expression="REGEX_CountMatches(Substring([rows],0,FindString([rows], &quot;@&quot;)), &quot; &quot;) + 1" field="R" size="4" type="Int32" enabled="true" />
+            <FormulaField expression="ToNumber(Length(REGEX_Replace([rows], &quot;.*\s([^\s]+@).*&quot;, &quot;$1&quot;)))" field="C" size="4" type="Int32" enabled="true" />
+            <FormulaField expression="Left([move], 1)" field="M" size="1073741823" type="V_WString" enabled="true" />
+            <FormulaField expression="Substring([move],1,length([move]))" field="move" size="2147483647" type="V_String" enabled="true" />
           </FormulaFields>
         </Configuration>
         <Annotation DisplayMode="0">
           <Name />
-          <AnnotationText>get this move</AnnotationText>
-          <DefaultAnnotationText>IterationNo = [Engine.IterationNumber]
-thisMove = Left([move], 1)
-move = Substri...</DefaultAnnotationText>
+          <AnnotationText>R, C, M, move</AnnotationText>
+          <DefaultAnnotationText>R = REGEX_CountMatches(Substring([rows],0,FindString([rows], "@")), " ") + 1
+C =...</DefaultAnnotationText>
           <Left value="False" />
         </Annotation>
         <MetaInfo connection="Output">
           <RecordInfo>
-            <Field name="map" size="2147483647" source="TextInput:" type="V_String" />
-            <Field name="move" size="2147483647" source="Formula: Substring([move],1,Length([move]))" type="V_String" />
-            <Field name="IterationNo" source="Formula: [Engine.IterationNumber]" type="Int16" />
-            <Field name="thisMove" size="1073741823" source="Formula: Left([move], 1)" type="V_WString" />
+            <Field name="rows" size="2147483647" source="TextInput:" type="V_String" />
+            <Field name="move" size="2147483647" source="Formula: Substring([move],1,length([move]))" type="V_String" />
+            <Field name="R" source="Formula: REGEX_CountMatches(Substring([rows],0,FindString([rows], &quot;@&quot;)), &quot; &quot;) + 1" type="Int32" />
+            <Field name="C" source="Formula: ToNumber(Length(REGEX_Replace([rows], &quot;.*\s([^\s]+@).*&quot;, &quot;$1&quot;)))" type="Int32" />
+            <Field name="M" size="1073741823" source="Formula: Left([move], 1)" type="V_WString" />
           </RecordInfo>
         </MetaInfo>
       </Properties>
       <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
     </Node>
     <Node ToolID="4">
-      <GuiSettings Plugin="AlteryxBasePluginsGui.AlteryxSelect.AlteryxSelect">
-        <Position x="330" y="150" />
-      </GuiSettings>
-      <Properties>
-        <Configuration>
-          <OrderChanged value="False" />
-          <CommaDecimal value="False" />
-          <SelectFields>
-            <SelectField field="move" selected="False" />
-            <SelectField field="map" selected="False" />
-            <SelectField field="*Unknown" selected="True" />
-          </SelectFields>
-        </Configuration>
-        <Annotation DisplayMode="0">
-          <Name />
-          <DefaultAnnotationText />
-          <Left value="False" />
-        </Annotation>
-        <MetaInfo connection="Output">
-          <RecordInfo>
-            <Field name="IterationNo" source="Formula: [Engine.IterationNumber]" type="Int16" />
-            <Field name="thisMove" size="1073741823" source="Formula: Left([move], 1)" type="V_WString" />
-          </RecordInfo>
-        </MetaInfo>
-      </Properties>
-      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSelect" />
-    </Node>
-    <Node ToolID="5">
-      <GuiSettings Plugin="AlteryxBasePluginsGui.MacroOutput.MacroOutput">
-        <Position x="726" y="150" />
-      </GuiSettings>
-      <Properties>
-        <Configuration>
-          <Name>Output</Name>
-          <Abbrev>O</Abbrev>
-        </Configuration>
-        <Annotation DisplayMode="0">
-          <Name />
-          <AnnotationText>Output</AnnotationText>
-          <DefaultAnnotationText>Output</DefaultAnnotationText>
-          <Left value="False" />
-        </Annotation>
-      </Properties>
-      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxMacroOutput" />
-    </Node>
-    <Node ToolID="6">
       <GuiSettings Plugin="AlteryxBasePluginsGui.Filter.Filter">
-        <Position x="330" y="234" />
+        <Position x="306" y="78" />
       </GuiSettings>
       <Properties>
         <Configuration>
-          <Expression>Length([move]) = 0</Expression>
-          <Mode>Custom</Mode>
+          <Mode>Simple</Mode>
+          <Simple>
+            <Operator>=</Operator>
+            <Field>M</Field>
+            <Operands>
+              <IgnoreTimeInDateTime>True</IgnoreTimeInDateTime>
+              <DateType>fixed</DateType>
+              <PeriodDate>2024-12-18 21:36:59</PeriodDate>
+              <PeriodType>
+              </PeriodType>
+              <PeriodCount>0</PeriodCount>
+              <Operand>&lt;</Operand>
+              <StartDate>2024-12-18 21:36:59</StartDate>
+              <EndDate>2024-12-18 21:36:59</EndDate>
+            </Operands>
+          </Simple>
         </Configuration>
         <Annotation DisplayMode="0">
           <Name />
-          <DefaultAnnotationText>Length([move]) = 0</DefaultAnnotationText>
+          <DefaultAnnotationText>[M] = "&lt;"</DefaultAnnotationText>
           <Left value="False" />
         </Annotation>
         <MetaInfo connection="True">
           <RecordInfo>
-            <Field name="map" size="2147483647" source="TextInput:" type="V_String" />
-            <Field name="move" size="2147483647" source="Formula: Substring([move],1,Length([move]))" type="V_String" />
-            <Field name="IterationNo" source="Formula: [Engine.IterationNumber]" type="Int16" />
-            <Field name="thisMove" size="1073741823" source="Formula: Left([move], 1)" type="V_WString" />
+            <Field name="rows" size="2147483647" source="TextInput:" type="V_String" />
+            <Field name="move" size="2147483647" source="Formula: Substring([move],1,length([move]))" type="V_String" />
+            <Field name="R" source="Formula: REGEX_CountMatches(Substring([rows],0,FindString([rows], &quot;@&quot;)), &quot; &quot;) + 1" type="Int32" />
+            <Field name="C" source="Formula: ToNumber(Length(REGEX_Replace([rows], &quot;.*\s([^\s]+@).*&quot;, &quot;$1&quot;)))" type="Int32" />
+            <Field name="M" size="1073741823" source="Formula: Left([move], 1)" type="V_WString" />
           </RecordInfo>
         </MetaInfo>
         <MetaInfo connection="False">
           <RecordInfo>
-            <Field name="map" size="2147483647" source="TextInput:" type="V_String" />
-            <Field name="move" size="2147483647" source="Formula: Substring([move],1,Length([move]))" type="V_String" />
-            <Field name="IterationNo" source="Formula: [Engine.IterationNumber]" type="Int16" />
-            <Field name="thisMove" size="1073741823" source="Formula: Left([move], 1)" type="V_WString" />
+            <Field name="rows" size="2147483647" source="TextInput:" type="V_String" />
+            <Field name="move" size="2147483647" source="Formula: Substring([move],1,length([move]))" type="V_String" />
+            <Field name="R" source="Formula: REGEX_CountMatches(Substring([rows],0,FindString([rows], &quot;@&quot;)), &quot; &quot;) + 1" type="Int32" />
+            <Field name="C" source="Formula: ToNumber(Length(REGEX_Replace([rows], &quot;.*\s([^\s]+@).*&quot;, &quot;$1&quot;)))" type="Int32" />
+            <Field name="M" size="1073741823" source="Formula: Left([move], 1)" type="V_WString" />
           </RecordInfo>
         </MetaInfo>
       </Properties>
       <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFilter" />
     </Node>
-    <Node ToolID="7">
+    <Node ToolID="5">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+        <Position x="414" y="66" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <FormulaFields>
+            <FormulaField expression="REGEX_Replace([rows], &quot;^(.*)\.([\[\]]*@)(.*)$&quot;, &quot;$1$2.$3&quot;)" field="rows" size="2147483647" type="V_String" enabled="true" />
+            <FormulaField expression="ToNumber(Length(REGEX_Replace([rows], &quot;.*\s([^\s]+@).*&quot;, &quot;$1&quot;)))" field="C" size="4" type="Int32" enabled="true" />
+          </FormulaFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <AnnotationText>rows, C</AnnotationText>
+          <DefaultAnnotationText>rows = REGEX_Replace([rows], "^(.*)\.([\[\]]*@)(.*)$", "$1$2.$3")
+C = ToNumber(L...</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="rows" size="2147483647" source="Formula: REGEX_Replace([rows], &quot;^(.*)\.([\[\]]*@)(.*)$&quot;, &quot;$1$2.$3&quot;)" type="V_String" />
+            <Field name="move" size="2147483647" source="Formula: Substring([move],1,length([move]))" type="V_String" />
+            <Field name="R" source="Formula: REGEX_CountMatches(Substring([rows],0,FindString([rows], &quot;@&quot;)), &quot; &quot;) + 1" type="Int32" />
+            <Field name="C" source="Formula: ToNumber(Length(REGEX_Replace([rows], &quot;.*\s([^\s]+@).*&quot;, &quot;$1&quot;)))" type="Int32" />
+            <Field name="M" size="1073741823" source="Formula: Left([move], 1)" type="V_WString" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+    </Node>
+    <Node ToolID="6">
       <GuiSettings Plugin="AlteryxBasePluginsGui.AlteryxSelect.AlteryxSelect">
-        <Position x="426" y="198" />
+        <Position x="510" y="66" />
       </GuiSettings>
       <Properties>
         <Configuration>
           <OrderChanged value="False" />
           <CommaDecimal value="False" />
           <SelectFields>
-            <SelectField field="map" selected="False" />
-            <SelectField field="IterationNo" selected="False" />
-            <SelectField field="thisMove" selected="False" />
+            <SelectField field="R" selected="False" />
+            <SelectField field="C" selected="False" />
+            <SelectField field="M" selected="False" />
             <SelectField field="*Unknown" selected="True" />
           </SelectFields>
         </Configuration>
@@ -187,37 +188,70 @@ move = Substri...</DefaultAnnotationText>
         </Annotation>
         <MetaInfo connection="Output">
           <RecordInfo>
-            <Field name="move" size="2147483647" source="Formula: Substring([move],1,Length([move]))" type="V_String" />
+            <Field name="rows" size="2147483647" source="Formula: REGEX_Replace([rows], &quot;^(.*)\.([\[\]]+@)(.*)$&quot;, &quot;$1$2.$3&quot;)" type="V_String" />
+            <Field name="move" size="2147483647" source="Formula: Substring([move],1,length([move]))" type="V_String" />
           </RecordInfo>
         </MetaInfo>
       </Properties>
       <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSelect" />
     </Node>
-    <Node ToolID="8">
-      <GuiSettings Plugin="AlteryxBasePluginsGui.MacroOutput.MacroOutput">
-        <Position x="726" y="234" />
+    <Node ToolID="7">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Filter.Filter">
+        <Position x="306" y="174" />
       </GuiSettings>
       <Properties>
         <Configuration>
-          <Name>Iteration</Name>
-          <Abbrev>I</Abbrev>
+          <Mode>Simple</Mode>
+          <Simple>
+            <Operator>=</Operator>
+            <Field>M</Field>
+            <Operands>
+              <IgnoreTimeInDateTime>True</IgnoreTimeInDateTime>
+              <DateType>fixed</DateType>
+              <PeriodDate>2024-12-18 22:03:09</PeriodDate>
+              <PeriodType>
+              </PeriodType>
+              <PeriodCount>0</PeriodCount>
+              <Operand>v</Operand>
+              <StartDate>2024-12-18 22:03:09</StartDate>
+              <EndDate>2024-12-18 22:03:09</EndDate>
+            </Operands>
+          </Simple>
         </Configuration>
         <Annotation DisplayMode="0">
           <Name />
-          <DefaultAnnotationText>Iteration</DefaultAnnotationText>
+          <DefaultAnnotationText>[M] = "v"</DefaultAnnotationText>
           <Left value="False" />
         </Annotation>
+        <MetaInfo connection="True">
+          <RecordInfo>
+            <Field name="rows" size="2147483647" source="TextInput:" type="V_String" />
+            <Field name="move" size="2147483647" source="Formula: Substring([move],1,length([move]))" type="V_String" />
+            <Field name="R" source="Formula: REGEX_CountMatches(Substring([rows],0,FindString([rows], &quot;@&quot;)), &quot; &quot;) + 1" type="Int32" />
+            <Field name="C" source="Formula: ToNumber(Length(REGEX_Replace([rows], &quot;.*\s([^\s]+@).*&quot;, &quot;$1&quot;)))" type="Int32" />
+            <Field name="M" size="1073741823" source="Formula: Left([move], 1)" type="V_WString" />
+          </RecordInfo>
+        </MetaInfo>
+        <MetaInfo connection="False">
+          <RecordInfo>
+            <Field name="rows" size="2147483647" source="TextInput:" type="V_String" />
+            <Field name="move" size="2147483647" source="Formula: Substring([move],1,length([move]))" type="V_String" />
+            <Field name="R" source="Formula: REGEX_CountMatches(Substring([rows],0,FindString([rows], &quot;@&quot;)), &quot; &quot;) + 1" type="Int32" />
+            <Field name="C" source="Formula: ToNumber(Length(REGEX_Replace([rows], &quot;.*\s([^\s]+@).*&quot;, &quot;$1&quot;)))" type="Int32" />
+            <Field name="M" size="1073741823" source="Formula: Left([move], 1)" type="V_WString" />
+          </RecordInfo>
+        </MetaInfo>
       </Properties>
-      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxMacroOutput" />
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFilter" />
     </Node>
-    <Node ToolID="9">
+    <Node ToolID="8">
       <GuiSettings Plugin="AlteryxBasePluginsGui.TextToColumns.TextToColumns">
-        <Position x="426" y="318" />
+        <Position x="414" y="162" />
       </GuiSettings>
       <Properties>
         <Configuration>
-          <Field>map</Field>
-          <Delimeters value="," />
+          <Field>rows</Field>
+          <Delimeters value="\s" />
           <NumFields value="1" />
           <Flags value="0" />
         </Configuration>
@@ -228,140 +262,58 @@ move = Substri...</DefaultAnnotationText>
         </Annotation>
         <MetaInfo connection="Output">
           <RecordInfo>
-            <Field description="TextToColumns: Parsed from map" name="map" size="2147483647" source="TextToColumns: Parsed from map" type="V_String" />
-            <Field name="thisMove" size="1073741823" source="Formula: Left([move], 1)" type="V_WString" />
+            <Field description="TextToColumns: Parsed from rows" name="rows" size="2147483647" source="TextToColumns: Parsed from rows" type="V_String" />
+            <Field name="move" size="2147483647" source="Formula: Substring([move],1,length([move]))" type="V_String" />
+            <Field name="R" source="Formula: REGEX_CountMatches(Substring([rows],0,FindString([rows], &quot;@&quot;)), &quot; &quot;) + 1" type="Int32" />
+            <Field name="C" source="Formula: ToNumber(Length(REGEX_Replace([rows], &quot;.*\s([^\s]+@).*&quot;, &quot;$1&quot;)))" type="Int32" />
+            <Field name="M" size="1073741823" source="Formula: Left([move], 1)" type="V_WString" />
           </RecordInfo>
         </MetaInfo>
       </Properties>
       <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxTextToColumns" />
     </Node>
-    <Node ToolID="10">
-      <GuiSettings Plugin="AlteryxBasePluginsGui.RecordID.RecordID">
-        <Position x="522" y="318" />
-      </GuiSettings>
-      <Properties>
-        <Configuration>
-          <FieldName>RecordID</FieldName>
-          <StartValue>1</StartValue>
-          <FieldType>Int32</FieldType>
-          <FieldSize>6</FieldSize>
-          <Position>0</Position>
-        </Configuration>
-        <Annotation DisplayMode="0">
-          <Name />
-          <AnnotationText>Left to Right</AnnotationText>
-          <DefaultAnnotationText />
-          <Left value="False" />
-        </Annotation>
-        <MetaInfo connection="Output">
-          <RecordInfo>
-            <Field name="RecordID" source="RecordID: Starting Value=1" type="Int32" />
-            <Field description="TextToColumns: Parsed from map" name="map" size="2147483647" source="TextToColumns: Parsed from map" type="V_String" />
-            <Field name="thisMove" size="1073741823" source="Formula: Left([move], 1)" type="V_WString" />
-          </RecordInfo>
-        </MetaInfo>
-      </Properties>
-      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxRecordID" />
-    </Node>
-    <Node ToolID="11">
-      <GuiSettings Plugin="AlteryxBasePluginsGui.AlteryxSelect.AlteryxSelect">
-        <Position x="330" y="318" />
-      </GuiSettings>
-      <Properties>
-        <Configuration>
-          <OrderChanged value="False" />
-          <CommaDecimal value="False" />
-          <SelectFields>
-            <SelectField field="move" selected="False" />
-            <SelectField field="IterationNo" selected="False" />
-            <SelectField field="*Unknown" selected="True" />
-          </SelectFields>
-        </Configuration>
-        <Annotation DisplayMode="0">
-          <Name />
-          <DefaultAnnotationText />
-          <Left value="False" />
-        </Annotation>
-        <MetaInfo connection="Output">
-          <RecordInfo>
-            <Field name="map" size="2147483647" source="TextInput:" type="V_String" />
-            <Field name="thisMove" size="1073741823" source="Formula: Left([move], 1)" type="V_WString" />
-          </RecordInfo>
-        </MetaInfo>
-      </Properties>
-      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSelect" />
-    </Node>
-    <Node ToolID="12">
-      <GuiSettings Plugin="AlteryxBasePluginsGui.Filter.Filter">
-        <Position x="618" y="318" />
-      </GuiSettings>
-      <Properties>
-        <Configuration>
-          <Expression>[thisMove] IN ("&lt;", "&gt;")</Expression>
-          <Mode>Custom</Mode>
-        </Configuration>
-        <Annotation DisplayMode="0">
-          <Name />
-          <DefaultAnnotationText>[thisMove] IN ("&lt;", "&gt;")</DefaultAnnotationText>
-          <Left value="False" />
-        </Annotation>
-        <MetaInfo connection="True">
-          <RecordInfo>
-            <Field name="RecordID" source="RecordID: Starting Value=1" type="Int32" />
-            <Field description="TextToColumns: Parsed from map" name="map" size="2147483647" source="TextToColumns: Parsed from map" type="V_String" />
-            <Field name="thisMove" size="1073741823" source="Formula: Left([move], 1)" type="V_WString" />
-          </RecordInfo>
-        </MetaInfo>
-        <MetaInfo connection="False">
-          <RecordInfo>
-            <Field name="RecordID" source="RecordID: Starting Value=1" type="Int32" />
-            <Field description="TextToColumns: Parsed from map" name="map" size="2147483647" source="TextToColumns: Parsed from map" type="V_String" />
-            <Field name="thisMove" size="1073741823" source="Formula: Left([move], 1)" type="V_WString" />
-          </RecordInfo>
-        </MetaInfo>
-      </Properties>
-      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFilter" />
-    </Node>
-    <Node ToolID="13">
+    <Node ToolID="9">
       <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
-        <Position x="726" y="318" />
+        <Position x="510" y="162" />
       </GuiSettings>
       <Properties>
         <Configuration>
           <FormulaFields>
-            <FormulaField expression="IF [thisMove] IN (&quot;&lt;&quot;, &quot;^&quot;)&#xA;THEN REGEX_Replace([map], &quot;^(.*)\.([\[\]]*@)(.*)$&quot;, &quot;$1$2\.$3&quot;)&#xA;ELSE REGEX_Replace([map], &quot;^(.*)(@[[\[\]]*)\.(.*)$&quot;, &quot;$1\.$2$3&quot;)&#xA;ENDIF" field="map" size="2147483647" type="V_String" enabled="true" />
+            <FormulaField expression="Substring([rows], [C]-1, 1)" field="col" size="1073741823" type="V_WString" enabled="true" />
           </FormulaFields>
         </Configuration>
         <Annotation DisplayMode="0">
           <Name />
-          <AnnotationText>newMap</AnnotationText>
-          <DefaultAnnotationText>map = IF [thisMove] IN ("&lt;", "^")
-THEN REGEX_Replace([map], "^(.*)\.([\[\]]*@)(....</DefaultAnnotationText>
+          <DefaultAnnotationText><![CDATA[col = Substring([rows], [C]-1, 1)
+]]></DefaultAnnotationText>
           <Left value="False" />
         </Annotation>
         <MetaInfo connection="Output">
           <RecordInfo>
-            <Field name="RecordID" source="RecordID: Starting Value=1" type="Int32" />
-            <Field description="TextToColumns: Parsed from map" name="map" size="2147483647" source="Formula: IF [thisMove] IN (&quot;&lt;&quot;, &quot;^&quot;)&#xA;THEN REGEX_Replace([map], &quot;^(.*)\.([\[\]]*@)(.*)$&quot;, &quot;$1$2\.$3&quot;)&#xA;ELSE REGEX_Replace([map], &quot;^(.*)(@[[\[\]]*)\.(.*)$&quot;, &quot;$1\.$2$3&quot;)&#xA;ENDIF" type="V_String" />
-            <Field name="thisMove" size="1073741823" source="Formula: Left([move], 1)" type="V_WString" />
+            <Field description="TextToColumns: Parsed from rows" name="rows" size="2147483647" source="TextToColumns: Parsed from rows" type="V_String" />
+            <Field name="move" size="2147483647" source="Formula: Substring([move],1,length([move]))" type="V_String" />
+            <Field name="R" source="Formula: REGEX_CountMatches(Substring([rows],0,FindString([rows], &quot;@&quot;)), &quot; &quot;) + 1" type="Int32" />
+            <Field name="C" source="Formula: ToNumber(Length(REGEX_Replace([rows], &quot;.*\s([^\s]+@).*&quot;, &quot;$1&quot;)))" type="Int32" />
+            <Field name="M" size="1073741823" source="Formula: Left([move], 1)" type="V_WString" />
+            <Field name="col" size="1073741823" source="Formula: Substring([rows], [C]-1, 1)" type="V_WString" />
           </RecordInfo>
         </MetaInfo>
       </Properties>
       <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
     </Node>
-    <Node ToolID="14">
-      <GuiSettings Plugin="AlteryxBasePluginsGui.AlteryxSelect.AlteryxSelect">
-        <Position x="426" y="246" />
+    <Node ToolID="10">
+      <GuiSettings Plugin="AlteryxSpatialPluginsGui.Summarize.Summarize">
+        <Position x="606" y="162" />
       </GuiSettings>
       <Properties>
         <Configuration>
-          <OrderChanged value="False" />
-          <CommaDecimal value="False" />
-          <SelectFields>
-            <SelectField field="IterationNo" selected="False" />
-            <SelectField field="thisMove" selected="False" />
-            <SelectField field="*Unknown" selected="True" />
-          </SelectFields>
+          <SummarizeFields>
+            <SummarizeField field="col" action="Concat" rename="col">
+              <Concat_Start />
+              <Separator />
+              <Concat_End />
+            </SummarizeField>
+          </SummarizeFields>
         </Configuration>
         <Annotation DisplayMode="0">
           <Name />
@@ -370,12 +322,30 @@ THEN REGEX_Replace([map], "^(.*)\.([\[\]]*@)(....</DefaultAnnotationText>
         </Annotation>
         <MetaInfo connection="Output">
           <RecordInfo>
-            <Field name="map" size="2147483647" source="TextInput:" type="V_String" />
-            <Field name="move" size="2147483647" source="Formula: Substring([move],1,Length([move]))" type="V_String" />
+            <Field name="col" size="1073741823" source="Summarize: Concat - col" type="V_WString" />
           </RecordInfo>
         </MetaInfo>
       </Properties>
-      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSelect" />
+      <EngineSettings EngineDll="AlteryxSpatialPluginsEngine.dll" EngineDllEntryPoint="AlteryxSummarize" />
+    </Node>
+    <Node ToolID="11">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+        <Position x="702" y="162" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <FormulaFields>
+            <FormulaField expression="REGEX_Replace([col], pattern, replace)" field="col" size="1073741823" type="V_WString" enabled="true" />
+          </FormulaFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText><![CDATA[col = REGEX_Replace([col], pattern, replace)
+]]></DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
     </Node>
   </Nodes>
   <Connections>
@@ -388,28 +358,24 @@ THEN REGEX_Replace([map], "^(.*)\.([\[\]]*@)(....</DefaultAnnotationText>
       <Destination ToolID="4" Connection="Input" />
     </Connection>
     <Connection>
-      <Origin ToolID="3" Connection="Output" />
-      <Destination ToolID="6" Connection="Input" />
-    </Connection>
-    <Connection>
-      <Origin ToolID="3" Connection="Output" />
-      <Destination ToolID="11" Connection="Input" />
-    </Connection>
-    <Connection>
-      <Origin ToolID="4" Connection="Output" />
+      <Origin ToolID="4" Connection="True" />
       <Destination ToolID="5" Connection="Input" />
     </Connection>
     <Connection>
-      <Origin ToolID="6" Connection="True" />
+      <Origin ToolID="4" Connection="False" />
       <Destination ToolID="7" Connection="Input" />
     </Connection>
     <Connection>
-      <Origin ToolID="6" Connection="False" />
-      <Destination ToolID="14" Connection="Input" />
+      <Origin ToolID="5" Connection="Output" />
+      <Destination ToolID="6" Connection="Input" />
     </Connection>
     <Connection>
-      <Origin ToolID="7" Connection="Output" />
+      <Origin ToolID="7" Connection="True" />
       <Destination ToolID="8" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="8" Connection="Output" />
+      <Destination ToolID="9" Connection="Input" />
     </Connection>
     <Connection>
       <Origin ToolID="9" Connection="Output" />
@@ -417,15 +383,7 @@ THEN REGEX_Replace([map], "^(.*)\.([\[\]]*@)(....</DefaultAnnotationText>
     </Connection>
     <Connection>
       <Origin ToolID="10" Connection="Output" />
-      <Destination ToolID="12" Connection="Input" />
-    </Connection>
-    <Connection>
-      <Origin ToolID="11" Connection="Output" />
-      <Destination ToolID="9" Connection="Input" />
-    </Connection>
-    <Connection>
-      <Origin ToolID="12" Connection="True" />
-      <Destination ToolID="13" Connection="Input" />
+      <Destination ToolID="11" Connection="Input" />
     </Connection>
   </Connections>
   <Properties>
@@ -454,18 +412,6 @@ THEN REGEX_Replace([map], "^(.*)\.([\[\]]*@)(....</DefaultAnnotationText>
         <Value />
         <IsNumeric value="False" />
       </Constant>
-      <Constant>
-        <Namespace>Question</Namespace>
-        <Name>Macro Output (5)</Name>
-        <Value />
-        <IsNumeric value="False" />
-      </Constant>
-      <Constant>
-        <Namespace>Question</Namespace>
-        <Name>Macro Output (8)</Name>
-        <Value />
-        <IsNumeric value="False" />
-      </Constant>
     </Constants>
     <MetaInfo>
       <NameIsFileName value="True" />
@@ -484,10 +430,10 @@ THEN REGEX_Replace([map], "^(.*)\.([\[\]]*@)(....</DefaultAnnotationText>
         <Description />
         <File />
       </Example>
-      <WorkflowId value="88975cb0-1e87-4434-b285-f7d5ddc61c1f" />
+      <WorkflowId value="a215d858-0594-4356-a47a-37f73d40b7d9" />
       <Telemetry>
-        <PreviousWorkflowId value="41082627-5d67-471f-9f8d-9b0c8fb0c027" />
-        <OriginWorkflowId value="41082627-5d67-471f-9f8d-9b0c8fb0c027" />
+        <PreviousWorkflowId value="6307387c-bc73-4a7f-9253-0a9fa58505e6" />
+        <OriginWorkflowId value="6307387c-bc73-4a7f-9253-0a9fa58505e6" />
       </Telemetry>
       <PlatformWorkflowId value="" />
     </MetaInfo>
@@ -509,18 +455,6 @@ THEN REGEX_Replace([map], "^(.*)\.([\[\]]*@)(....</DefaultAnnotationText>
               <Name>Macro Input (1)</Name>
               <ToolId value="1" />
             </Question>
-            <Question>
-              <Type>MacroOutput</Type>
-              <Description />
-              <Name>Macro Output (5)</Name>
-              <ToolId value="5" />
-            </Question>
-            <Question>
-              <Type>MacroOutput</Type>
-              <Description />
-              <Name>Macro Output (8)</Name>
-              <ToolId value="8" />
-            </Question>
           </Questions>
         </Question>
       </Questions>
@@ -533,10 +467,7 @@ THEN REGEX_Replace([map], "^(.*)\.([\[\]]*@)(....</DefaultAnnotationText>
       <Wiz_CustomHelp value="False" />
       <Wiz_CustomGraphic value="False" />
       <Wiz_ShowOutput value="True" />
-      <Wiz_OpenOutputTools>
-        <Tool ToolId="5" Selected="True" />
-        <Tool ToolId="8" Selected="True" />
-      </Wiz_OpenOutputTools>
+      <Wiz_OpenOutputTools />
       <Wiz_OutputMessage />
       <Wiz_NoOutputFilesMessage />
       <Wiz_ChainRunWizard />
