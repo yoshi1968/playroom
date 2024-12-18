@@ -3,7 +3,7 @@
   <Nodes>
     <Node ToolID="1">
       <GuiSettings Plugin="AlteryxBasePluginsGui.TextInput.TextInput">
-        <Position x="54" y="66" />
+        <Position x="54" y="114" />
       </GuiSettings>
       <Properties>
         <Configuration>
@@ -69,19 +69,19 @@
     </Node>
     <Node ToolID="2">
       <GuiSettings Plugin="AlteryxBasePluginsGui.RecordID.RecordID">
-        <Position x="138" y="66" />
+        <Position x="138" y="114" />
       </GuiSettings>
       <Properties>
         <Configuration>
-          <FieldName>y</FieldName>
-          <StartValue>0</StartValue>
+          <FieldName>R</FieldName>
+          <StartValue>1</StartValue>
           <FieldType>Int32</FieldType>
           <FieldSize>6</FieldSize>
           <Position>0</Position>
         </Configuration>
         <Annotation DisplayMode="0">
           <Name />
-          <AnnotationText>y</AnnotationText>
+          <AnnotationText>R</AnnotationText>
           <DefaultAnnotationText />
           <Left value="False" />
         </Annotation>
@@ -90,7 +90,7 @@
     </Node>
     <Node ToolID="3">
       <GuiSettings Plugin="AlteryxBasePluginsGui.RegEx.RegEx">
-        <Position x="234" y="66" />
+        <Position x="234" y="114" />
       </GuiSettings>
       <Properties>
         <Configuration>
@@ -122,14 +122,14 @@
     </Node>
     <Node ToolID="4">
       <GuiSettings Plugin="AlteryxBasePluginsGui.Tile.Tile">
-        <Position x="330" y="66" />
+        <Position x="330" y="114" />
       </GuiSettings>
       <Properties>
         <Configuration>
           <Method>UniqueValue</Method>
           <UniqueValue>
             <UniqueFields>
-              <Field field="y" />
+              <Field field="R" />
             </UniqueFields>
             <DontSort value="False" />
           </UniqueValue>
@@ -143,40 +143,19 @@
       </Properties>
       <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxTile" />
     </Node>
-    <Node ToolID="5">
-      <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
-        <Position x="426" y="66" />
-      </GuiSettings>
-      <Properties>
-        <Configuration>
-          <FormulaFields>
-            <FormulaField expression="[Tile_SequenceNum] - 1" field="x" size="4" type="Int32" enabled="true" />
-          </FormulaFields>
-        </Configuration>
-        <Annotation DisplayMode="0">
-          <Name />
-          <AnnotationText>x</AnnotationText>
-          <DefaultAnnotationText><![CDATA[x = [Tile_SequenceNum] - 1
-]]></DefaultAnnotationText>
-          <Left value="False" />
-        </Annotation>
-      </Properties>
-      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
-    </Node>
     <Node ToolID="6">
       <GuiSettings Plugin="AlteryxBasePluginsGui.AlteryxSelect.AlteryxSelect">
-        <Position x="522" y="66" />
+        <Position x="426" y="114" />
       </GuiSettings>
       <Properties>
         <Configuration>
           <OrderChanged value="True" />
           <CommaDecimal value="False" />
           <SelectFields>
-            <SelectField field="x" selected="True" />
-            <SelectField field="y" selected="True" />
+            <SelectField field="R" selected="True" />
+            <SelectField field="Tile_SequenceNum" selected="True" rename="C" />
             <SelectField field="Field1" selected="True" rename="value" />
             <SelectField field="Tile_Num" selected="False" />
-            <SelectField field="Tile_SequenceNum" selected="False" />
             <SelectField field="*Unknown" selected="True" />
           </SelectFields>
         </Configuration>
@@ -188,85 +167,105 @@
       </Properties>
       <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSelect" />
     </Node>
-    <Node ToolID="11">
-      <GuiSettings Plugin="AlteryxBasePluginsGui.Filter.Filter">
-        <Position x="618" y="66" />
+    <Node ToolID="15">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Sort.Sort">
+        <Position x="522" y="114" />
       </GuiSettings>
       <Properties>
         <Configuration>
-          <Mode>Simple</Mode>
-          <Simple>
-            <Operator>!=</Operator>
-            <Field>value</Field>
-            <Operands>
-              <IgnoreTimeInDateTime>True</IgnoreTimeInDateTime>
-              <DateType>fixed</DateType>
-              <PeriodDate>2024-12-16 20:41:53</PeriodDate>
-              <PeriodType>
-              </PeriodType>
-              <PeriodCount>0</PeriodCount>
-              <Operand>#</Operand>
-              <StartDate>2024-12-16 20:41:53</StartDate>
-              <EndDate>2024-12-16 20:41:53</EndDate>
-            </Operands>
-          </Simple>
+          <SortInfo locale="1033">
+            <Field field="C" order="Ascending" />
+            <Field field="R" order="Ascending" />
+          </SortInfo>
         </Configuration>
         <Annotation DisplayMode="0">
           <Name />
-          <DefaultAnnotationText>[value] != "#"</DefaultAnnotationText>
+          <DefaultAnnotationText>C - Ascending
+R - Ascending</DefaultAnnotationText>
           <Left value="False" />
         </Annotation>
       </Properties>
-      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFilter" />
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSort" />
     </Node>
-    <Node ToolID="12">
-      <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+    <Node ToolID="16">
+      <GuiSettings Plugin="AlteryxSpatialPluginsGui.Summarize.Summarize">
+        <Position x="618" y="114" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <SummarizeFields>
+            <SummarizeField field="C" action="GroupBy" rename="C" />
+            <SummarizeField field="value" action="Concat" rename="Field1">
+              <Concat_Start />
+              <Separator />
+              <Concat_End />
+            </SummarizeField>
+          </SummarizeFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxSpatialPluginsEngine.dll" EngineDllEntryPoint="AlteryxSummarize" />
+    </Node>
+    <Node ToolID="17">
+      <GuiSettings Plugin="AlteryxSpatialPluginsGui.Summarize.Summarize">
         <Position x="726" y="54" />
       </GuiSettings>
       <Properties>
         <Configuration>
-          <FormulaFields>
-            <FormulaField expression="[x]" field="x_v" size="4" type="Int32" enabled="true" />
-            <FormulaField expression="[y] + 1" field="y_v" size="4" type="Int32" enabled="true" />
-          </FormulaFields>
+          <SummarizeFields>
+            <SummarizeField field="Field1" action="Concat" rename="rows">
+              <Concat_Start />
+              <Separator>\s</Separator>
+              <Concat_End />
+            </SummarizeField>
+          </SummarizeFields>
         </Configuration>
         <Annotation DisplayMode="0">
           <Name />
-          <DefaultAnnotationText><![CDATA[x_v = [x]
-y_v = [y] + 1
-]]></DefaultAnnotationText>
+          <DefaultAnnotationText />
           <Left value="False" />
         </Annotation>
       </Properties>
-      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+      <EngineSettings EngineDll="AlteryxSpatialPluginsEngine.dll" EngineDllEntryPoint="AlteryxSummarize" />
     </Node>
-    <Node ToolID="13">
-      <GuiSettings Plugin="AlteryxBasePluginsGui.Join.Join">
-        <Position x="846" y="66" />
+    <Node ToolID="18">
+      <GuiSettings Plugin="AlteryxSpatialPluginsGui.Summarize.Summarize">
+        <Position x="726" y="114" />
       </GuiSettings>
       <Properties>
-        <Configuration joinByRecordPos="False">
-          <JoinInfo connection="Left">
-            <Field field="x_v" />
-            <Field field="y_v" />
-          </JoinInfo>
-          <JoinInfo connection="Right">
-            <Field field="x" />
-            <Field field="y" />
-          </JoinInfo>
+        <Configuration>
+          <SummarizeFields>
+            <SummarizeField field="Field1" action="Concat" rename="cols">
+              <Concat_Start />
+              <Separator>\s</Separator>
+              <Concat_End />
+            </SummarizeField>
+          </SummarizeFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxSpatialPluginsEngine.dll" EngineDllEntryPoint="AlteryxSummarize" />
+    </Node>
+    <Node ToolID="19">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.AppendFields.AppendFields">
+        <Position x="834" y="102" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <CartesianMode>Error</CartesianMode>
           <SelectConfiguration>
-            <Configuration outputConnection="Join">
+            <Configuration outputConnection="Output">
               <OrderChanged value="False" />
               <CommaDecimal value="False" />
               <SelectFields>
-                <SelectField field="Left_value" selected="False" input="Left_" />
-                <SelectField field="Left_x_v" selected="False" input="Left_" />
-                <SelectField field="Left_y_v" selected="False" input="Left_" />
-                <SelectField field="Right_x" selected="False" rename="Right_x" input="Right_" />
-                <SelectField field="Right_y" selected="False" rename="Right_y" input="Right_" />
-                <SelectField field="Right_value" selected="False" rename="Right_value" input="Right_" />
-                <SelectField field="Right_x_v" selected="False" rename="Right_x_v" input="Right_" />
-                <SelectField field="Right_y_v" selected="False" rename="Right_y_v" input="Right_" />
                 <SelectField field="*Unknown" selected="True" />
               </SelectFields>
             </Configuration>
@@ -278,33 +277,203 @@ y_v = [y] + 1
           <Left value="False" />
         </Annotation>
       </Properties>
-      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxJoin" />
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxAppendFields" />
     </Node>
-    <Node ToolID="14">
-      <GuiSettings Plugin="AlteryxBasePluginsGui.Sort.Sort">
-        <Position x="942" y="66" />
+    <Node ToolID="20">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Filter.Filter">
+        <Position x="522" y="198" />
       </GuiSettings>
       <Properties>
         <Configuration>
-          <SortInfo locale="1033">
-            <Field field="y" order="Ascending" />
-            <Field field="x" order="Ascending" />
-          </SortInfo>
+          <Mode>Simple</Mode>
+          <Simple>
+            <Operator>=</Operator>
+            <Field>value</Field>
+            <Operands>
+              <IgnoreTimeInDateTime>True</IgnoreTimeInDateTime>
+              <DateType>fixed</DateType>
+              <PeriodDate>2024-12-17 21:20:24</PeriodDate>
+              <PeriodType>
+              </PeriodType>
+              <PeriodCount>0</PeriodCount>
+              <Operand>S</Operand>
+              <StartDate>2024-12-17 21:20:24</StartDate>
+              <EndDate>2024-12-17 21:20:24</EndDate>
+            </Operands>
+          </Simple>
         </Configuration>
         <Annotation DisplayMode="0">
           <Name />
-          <DefaultAnnotationText>y - Ascending
-x - Ascending</DefaultAnnotationText>
+          <DefaultAnnotationText>[value] = "S"</DefaultAnnotationText>
           <Left value="False" />
         </Annotation>
       </Properties>
-      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSort" />
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFilter" />
+    </Node>
+    <Node ToolID="21">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+        <Position x="618" y="186" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <FormulaFields>
+            <FormulaField expression="&quot;R&quot; + ToString([R]) + &quot;C&quot; + ToString([C])" field="S" size="1073741823" type="V_WString" enabled="true" />
+          </FormulaFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <AnnotationText>S</AnnotationText>
+          <DefaultAnnotationText><![CDATA[S = "R" + ToString([R]) + "C" + ToString([C])
+]]></DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+    </Node>
+    <Node ToolID="22">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Filter.Filter">
+        <Position x="522" y="282" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Mode>Simple</Mode>
+          <Simple>
+            <Operator>=</Operator>
+            <Field>value</Field>
+            <Operands>
+              <IgnoreTimeInDateTime>True</IgnoreTimeInDateTime>
+              <DateType>fixed</DateType>
+              <PeriodDate>2024-12-17 21:21:51</PeriodDate>
+              <PeriodType>
+              </PeriodType>
+              <PeriodCount>0</PeriodCount>
+              <Operand>E</Operand>
+              <StartDate>2024-12-17 21:21:51</StartDate>
+              <EndDate>2024-12-17 21:21:51</EndDate>
+            </Operands>
+          </Simple>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>[value] = "E"</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFilter" />
+    </Node>
+    <Node ToolID="23">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+        <Position x="618" y="270" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <FormulaFields>
+            <FormulaField expression="&quot;R&quot; + ToString([R]) + &quot;C&quot; + ToString([C])" field="E" size="1073741823" type="V_WString" enabled="true" />
+          </FormulaFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <AnnotationText>E</AnnotationText>
+          <DefaultAnnotationText><![CDATA[E = "R" + ToString([R]) + "C" + ToString([C])
+]]></DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+    </Node>
+    <Node ToolID="24">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.AppendFields.AppendFields">
+        <Position x="726" y="198" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <CartesianMode>Error</CartesianMode>
+          <SelectConfiguration>
+            <Configuration outputConnection="Output">
+              <OrderChanged value="False" />
+              <CommaDecimal value="False" />
+              <SelectFields>
+                <SelectField field="Target_x" selected="False" input="Target_" />
+                <SelectField field="Target_y" selected="False" input="Target_" />
+                <SelectField field="Target_value" selected="False" input="Target_" />
+                <SelectField field="Source_x" selected="False" rename="Source_x" input="Source_" />
+                <SelectField field="Source_y" selected="False" rename="Source_y" input="Source_" />
+                <SelectField field="Source_value" selected="False" rename="Source_value" input="Source_" />
+                <SelectField field="*Unknown" selected="True" />
+              </SelectFields>
+            </Configuration>
+          </SelectConfiguration>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxAppendFields" />
+    </Node>
+    <Node ToolID="25">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+        <Position x="834" y="198" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <FormulaFields>
+            <FormulaField expression="Null()" field="route" size="1073741823" type="V_WString" enabled="true" />
+          </FormulaFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText><![CDATA[route = Null()
+]]></DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+    </Node>
+    <Node ToolID="26">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.AppendFields.AppendFields">
+        <Position x="942" y="114" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <CartesianMode>Error</CartesianMode>
+          <SelectConfiguration>
+            <Configuration outputConnection="Output">
+              <OrderChanged value="True" />
+              <CommaDecimal value="False" />
+              <SelectFields>
+                <SelectField field="Source_S" selected="True" rename="Current" input="Source_" />
+                <SelectField field="Source_E" selected="True" input="Source_" />
+                <SelectField field="Target_rows" selected="True" input="Target_" />
+                <SelectField field="Target_cols" selected="True" input="Target_" />
+                <SelectField field="Source_R" selected="False" input="Source_" />
+                <SelectField field="Source_C" selected="False" input="Source_" />
+                <SelectField field="Source_Source_R" selected="False" rename="Source_Source_R" input="Source_" />
+                <SelectField field="Source_Source_C" selected="False" rename="Source_Source_C" input="Source_" />
+                <SelectField field="Source_route" selected="True" input="Source_" />
+                <SelectField field="*Unknown" selected="True" />
+              </SelectFields>
+            </Configuration>
+          </SelectConfiguration>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxAppendFields" />
     </Node>
   </Nodes>
   <Connections>
     <Connection>
       <Origin ToolID="1" Connection="Output" />
       <Destination ToolID="2" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="1" Connection="Output" />
+      <Destination ToolID="17" Connection="Input" />
     </Connection>
     <Connection>
       <Origin ToolID="2" Connection="Output" />
@@ -316,31 +485,63 @@ x - Ascending</DefaultAnnotationText>
     </Connection>
     <Connection>
       <Origin ToolID="4" Connection="Output" />
-      <Destination ToolID="5" Connection="Input" />
-    </Connection>
-    <Connection>
-      <Origin ToolID="5" Connection="Output" />
       <Destination ToolID="6" Connection="Input" />
     </Connection>
     <Connection>
       <Origin ToolID="6" Connection="Output" />
-      <Destination ToolID="11" Connection="Input" />
+      <Destination ToolID="15" Connection="Input" />
     </Connection>
     <Connection>
-      <Origin ToolID="11" Connection="True" />
-      <Destination ToolID="12" Connection="Input" />
+      <Origin ToolID="6" Connection="Output" />
+      <Destination ToolID="20" Connection="Input" />
     </Connection>
     <Connection>
-      <Origin ToolID="12" Connection="Output" />
-      <Destination ToolID="13" Connection="Left" />
+      <Origin ToolID="6" Connection="Output" />
+      <Destination ToolID="22" Connection="Input" />
     </Connection>
     <Connection>
-      <Origin ToolID="12" Connection="Output" />
-      <Destination ToolID="13" Connection="Right" />
+      <Origin ToolID="15" Connection="Output" />
+      <Destination ToolID="16" Connection="Input" />
     </Connection>
     <Connection>
-      <Origin ToolID="13" Connection="Join" />
-      <Destination ToolID="14" Connection="Input" />
+      <Origin ToolID="16" Connection="Output" />
+      <Destination ToolID="18" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="17" Connection="Output" />
+      <Destination ToolID="19" Connection="Targets" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="18" Connection="Output" />
+      <Destination ToolID="19" Connection="Source" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="19" Connection="Output" />
+      <Destination ToolID="26" Connection="Targets" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="25" Connection="Output" />
+      <Destination ToolID="26" Connection="Source" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="20" Connection="True" />
+      <Destination ToolID="21" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="21" Connection="Output" />
+      <Destination ToolID="24" Connection="Targets" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="23" Connection="Output" />
+      <Destination ToolID="24" Connection="Source" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="22" Connection="True" />
+      <Destination ToolID="23" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="24" Connection="Output" />
+      <Destination ToolID="25" Connection="Input" />
     </Connection>
   </Connections>
   <Properties>

@@ -1,0 +1,2039 @@
+<?xml version="1.0"?>
+<AlteryxDocument yxmdVer="2024.1" RunE2="T">
+  <Nodes>
+    <Node ToolID="1">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.MacroInput.MacroInput">
+        <Position x="54" y="90" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <UseFileInput value="False" />
+          <Name>Input1</Name>
+          <Abbrev />
+          <ShowFieldMap value="False" />
+          <Optional value="False" />
+          <TextInput>
+            <Configuration>
+              <NumRows value="1" />
+              <Fields>
+                <Field name="Current" />
+                <Field name="E" />
+                <Field name="rows" />
+                <Field name="cols" />
+                <Field name="route" />
+              </Fields>
+              <Data>
+                <r>
+                  <c>R8C9</c>
+                  <c>R2C14</c>
+                  <c>############### #.......#....E# #.#.###.#.###.# #.....#.#...#.# #.###.#####.#.# #.#.#.......#.# #.#.#####.###.# #...........#.# ###.#.#####.#.# #...#.....#.#.# #.#.#.###.#.#.# #.....#...#.#.# #.###.#.#.#.#.# #S..#.....#...# ###############</c>
+                  <c>############### #.......#....S# #.#.###.#.#.#.# #...#.......#.# #.#.###.###.### #.#...#.......# #.###.#.#.###.# #...#.#.#.#...# #####.#.#.#.#.# #...#...#.....# #.#.#.#.####### #.#...#.......# #.###########.# #E............# ###############</c>
+                  <c />
+                </r>
+              </Data>
+            </Configuration>
+          </TextInput>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <AnnotationText>Input</AnnotationText>
+          <DefaultAnnotationText />
+          <Left value="True" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="Current" size="2147483647" source="TextInput:" type="V_String" />
+            <Field name="E" size="2147483647" source="TextInput:" type="V_String" />
+            <Field name="rows" size="2147483647" source="TextInput:" type="V_String" />
+            <Field name="cols" size="2147483647" source="TextInput:" type="V_String" />
+            <Field name="route" source="TextInput:" type="Bool" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxMacroInput" />
+    </Node>
+    <Node ToolID="2">
+      <GuiSettings Plugin="AlteryxGuiToolkit.Questions.Tab.Tab">
+        <Position x="0" y="0" width="59" height="59" />
+      </GuiSettings>
+      <Properties>
+        <Configuration />
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+    </Node>
+    <Node ToolID="5">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+        <Position x="162" y="90" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <FormulaFields>
+            <FormulaField expression="ToNumber(REGEX_Replace([Current], &quot;R(\d+)C.*&quot;, &quot;$1&quot;))" field="R" size="4" type="Int32" enabled="true" />
+            <FormulaField expression="GetWord([rows], [R] - 1)" field="row" size="2147483647" type="V_String" enabled="true" />
+            <FormulaField expression="ToNumber(REGEX_Replace([Current], &quot;.*C&quot;, &quot;&quot;))" field="C" size="4" type="Int32" enabled="true" />
+            <FormulaField expression="GetWord([cols], [C] - 1)" field="col" size="1073741823" type="V_WString" enabled="true" />
+            <FormulaField expression="REGEX_CountMatches(&#xA;  Substring([row], [C],     1) +    // &gt; : right&#xA;  Substring([row], [C] - 2, 1) +    // &lt; : left&#xA;  Substring([col], [R] ,    1) +    // ^ : up&#xA;  Substring([col], [R] - 2, 1),     // v : down,&#xA;&quot;\.&quot;)                               // count &quot;.&quot;" field="numOpenDir" size="1" type="Byte" enabled="true" />
+          </FormulaFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <AnnotationText>Next</AnnotationText>
+          <DefaultAnnotationText>R = ToNumber(REGEX_Replace([Current], "R(\d+)C.*", "$1"))
+row = GetWord([rows], ...</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="Current" size="2147483647" source="TextInput:" type="V_String" />
+            <Field name="E" size="2147483647" source="TextInput:" type="V_String" />
+            <Field name="rows" size="2147483647" source="TextInput:" type="V_String" />
+            <Field name="cols" size="2147483647" source="TextInput:" type="V_String" />
+            <Field name="route" source="TextInput:" type="Bool" />
+            <Field name="R" source="Formula: ToNumber(REGEX_Replace([Current], &quot;R(\d+)C.*&quot;, &quot;$1&quot;))" type="Int32" />
+            <Field name="row" size="2147483647" source="Formula: GetWord([rows], [R] - 1)" type="V_String" />
+            <Field name="C" source="Formula: ToNumber(REGEX_Replace([Current], &quot;.*C&quot;, &quot;&quot;))" type="Int32" />
+            <Field name="col" size="1073741823" source="Formula: GetWord([cols], [C] - 1)" type="V_WString" />
+            <Field name="numOpenDir" source="Formula: REGEX_CountMatches(&#xA;  Substring([row], [C],     1) +    // &gt; : right&#xA;  Substring([row], [C] - 2, 1) +    // &lt; : left&#xA;  Substring([col], [R] ,    1) +    // ^ : up&#xA;  Substring([col], [R] - 2, 1),     // v : down,&#xA;&quot;\.&quot;)                               // count &quot;.&quot;" type="Byte" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+    </Node>
+    <Node ToolID="7">
+      <GuiSettings Plugin="AlteryxGuiToolkit.TextBox.TextBox">
+        <Position x="522" y="54" width="252" height="16" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Text>隣でなく、次の分岐か突き当りの座標をさがす</Text>
+          <Font name="Arial" size="8.25" style="0" />
+          <TextColor name="Black" />
+          <FillColor name="White" />
+          <Shape shape="0" />
+          <Justification Justification="4" />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+    </Node>
+    <Node ToolID="12">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.AlteryxSelect.AlteryxSelect">
+        <Position x="270" y="90" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <OrderChanged value="False" />
+          <CommaDecimal value="False" />
+          <SelectFields>
+            <SelectField field="route" selected="False" />
+            <SelectField field="string" selected="False" />
+            <SelectField field="remain" selected="False" />
+            <SelectField field="*Unknown" selected="True" />
+          </SelectFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="Current" size="2147483647" source="TextInput:" type="V_String" />
+            <Field name="E" size="2147483647" source="TextInput:" type="V_String" />
+            <Field name="rows" size="2147483647" source="TextInput:" type="V_String" />
+            <Field name="cols" size="2147483647" source="TextInput:" type="V_String" />
+            <Field name="R" source="Formula: ToNumber(REGEX_Replace([Current], &quot;R(\d+)C.*&quot;, &quot;$1&quot;))" type="Int32" />
+            <Field name="row" size="2147483647" source="Formula: GetWord([rows], [R] - 1)" type="V_String" />
+            <Field name="C" source="Formula: ToNumber(REGEX_Replace([Current], &quot;.*C&quot;, &quot;&quot;))" type="Int32" />
+            <Field name="col" size="1073741823" source="Formula: GetWord([cols], [C] - 1)" type="V_WString" />
+            <Field name="numOpenDir" source="Formula: REGEX_CountMatches(&#xA;  Substring([row], [C],     1) +    // &gt; : right&#xA;  Substring([row], [C] - 2, 1) +    // &lt; : left&#xA;  Substring([col], [R] ,    1) +    // ^ : up&#xA;  Substring([col], [R] - 2, 1),     // v : down,&#xA;&quot;\.&quot;)                               // count &quot;.&quot;" type="Byte" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSelect" />
+    </Node>
+    <Node ToolID="13">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.TextInput.TextInput">
+        <Position x="54" y="222" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <NumRows value="225" />
+          <Fields>
+            <Field name="R" />
+            <Field name="C" />
+            <Field name="value" />
+          </Fields>
+          <Data>
+            <r>
+              <c>1</c>
+              <c>1</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>2</c>
+              <c>1</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>3</c>
+              <c>1</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>4</c>
+              <c>1</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>5</c>
+              <c>1</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>6</c>
+              <c>1</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>7</c>
+              <c>1</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>8</c>
+              <c>1</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>9</c>
+              <c>1</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>10</c>
+              <c>1</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>11</c>
+              <c>1</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>12</c>
+              <c>1</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>13</c>
+              <c>1</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>14</c>
+              <c>1</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>15</c>
+              <c>1</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>1</c>
+              <c>2</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>2</c>
+              <c>2</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>3</c>
+              <c>2</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>4</c>
+              <c>2</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>5</c>
+              <c>2</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>6</c>
+              <c>2</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>7</c>
+              <c>2</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>8</c>
+              <c>2</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>9</c>
+              <c>2</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>10</c>
+              <c>2</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>11</c>
+              <c>2</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>12</c>
+              <c>2</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>13</c>
+              <c>2</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>14</c>
+              <c>2</c>
+              <c>S</c>
+            </r>
+            <r>
+              <c>15</c>
+              <c>2</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>1</c>
+              <c>3</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>2</c>
+              <c>3</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>3</c>
+              <c>3</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>4</c>
+              <c>3</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>5</c>
+              <c>3</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>6</c>
+              <c>3</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>7</c>
+              <c>3</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>8</c>
+              <c>3</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>9</c>
+              <c>3</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>10</c>
+              <c>3</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>11</c>
+              <c>3</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>12</c>
+              <c>3</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>13</c>
+              <c>3</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>14</c>
+              <c>3</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>15</c>
+              <c>3</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>1</c>
+              <c>4</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>2</c>
+              <c>4</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>3</c>
+              <c>4</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>4</c>
+              <c>4</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>5</c>
+              <c>4</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>6</c>
+              <c>4</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>7</c>
+              <c>4</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>8</c>
+              <c>4</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>9</c>
+              <c>4</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>10</c>
+              <c>4</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>11</c>
+              <c>4</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>12</c>
+              <c>4</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>13</c>
+              <c>4</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>14</c>
+              <c>4</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>15</c>
+              <c>4</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>1</c>
+              <c>5</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>2</c>
+              <c>5</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>3</c>
+              <c>5</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>4</c>
+              <c>5</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>5</c>
+              <c>5</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>6</c>
+              <c>5</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>7</c>
+              <c>5</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>8</c>
+              <c>5</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>9</c>
+              <c>5</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>10</c>
+              <c>5</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>11</c>
+              <c>5</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>12</c>
+              <c>5</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>13</c>
+              <c>5</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>14</c>
+              <c>5</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>15</c>
+              <c>5</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>1</c>
+              <c>6</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>2</c>
+              <c>6</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>3</c>
+              <c>6</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>4</c>
+              <c>6</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>5</c>
+              <c>6</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>6</c>
+              <c>6</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>7</c>
+              <c>6</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>8</c>
+              <c>6</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>9</c>
+              <c>6</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>10</c>
+              <c>6</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>11</c>
+              <c>6</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>12</c>
+              <c>6</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>13</c>
+              <c>6</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>14</c>
+              <c>6</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>15</c>
+              <c>6</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>1</c>
+              <c>7</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>2</c>
+              <c>7</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>3</c>
+              <c>7</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>4</c>
+              <c>7</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>5</c>
+              <c>7</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>6</c>
+              <c>7</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>7</c>
+              <c>7</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>8</c>
+              <c>7</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>9</c>
+              <c>7</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>10</c>
+              <c>7</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>11</c>
+              <c>7</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>12</c>
+              <c>7</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>13</c>
+              <c>7</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>14</c>
+              <c>7</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>15</c>
+              <c>7</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>1</c>
+              <c>8</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>2</c>
+              <c>8</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>3</c>
+              <c>8</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>4</c>
+              <c>8</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>5</c>
+              <c>8</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>6</c>
+              <c>8</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>7</c>
+              <c>8</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>8</c>
+              <c>8</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>9</c>
+              <c>8</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>10</c>
+              <c>8</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>11</c>
+              <c>8</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>12</c>
+              <c>8</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>13</c>
+              <c>8</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>14</c>
+              <c>8</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>15</c>
+              <c>8</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>1</c>
+              <c>9</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>2</c>
+              <c>9</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>3</c>
+              <c>9</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>4</c>
+              <c>9</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>5</c>
+              <c>9</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>6</c>
+              <c>9</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>7</c>
+              <c>9</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>8</c>
+              <c>9</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>9</c>
+              <c>9</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>10</c>
+              <c>9</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>11</c>
+              <c>9</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>12</c>
+              <c>9</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>13</c>
+              <c>9</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>14</c>
+              <c>9</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>15</c>
+              <c>9</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>1</c>
+              <c>10</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>2</c>
+              <c>10</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>3</c>
+              <c>10</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>4</c>
+              <c>10</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>5</c>
+              <c>10</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>6</c>
+              <c>10</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>7</c>
+              <c>10</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>8</c>
+              <c>10</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>9</c>
+              <c>10</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>10</c>
+              <c>10</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>11</c>
+              <c>10</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>12</c>
+              <c>10</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>13</c>
+              <c>10</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>14</c>
+              <c>10</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>15</c>
+              <c>10</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>1</c>
+              <c>11</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>2</c>
+              <c>11</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>3</c>
+              <c>11</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>4</c>
+              <c>11</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>5</c>
+              <c>11</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>6</c>
+              <c>11</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>7</c>
+              <c>11</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>8</c>
+              <c>11</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>9</c>
+              <c>11</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>10</c>
+              <c>11</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>11</c>
+              <c>11</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>12</c>
+              <c>11</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>13</c>
+              <c>11</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>14</c>
+              <c>11</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>15</c>
+              <c>11</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>1</c>
+              <c>12</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>2</c>
+              <c>12</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>3</c>
+              <c>12</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>4</c>
+              <c>12</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>5</c>
+              <c>12</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>6</c>
+              <c>12</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>7</c>
+              <c>12</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>8</c>
+              <c>12</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>9</c>
+              <c>12</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>10</c>
+              <c>12</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>11</c>
+              <c>12</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>12</c>
+              <c>12</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>13</c>
+              <c>12</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>14</c>
+              <c>12</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>15</c>
+              <c>12</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>1</c>
+              <c>13</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>2</c>
+              <c>13</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>3</c>
+              <c>13</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>4</c>
+              <c>13</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>5</c>
+              <c>13</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>6</c>
+              <c>13</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>7</c>
+              <c>13</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>8</c>
+              <c>13</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>9</c>
+              <c>13</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>10</c>
+              <c>13</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>11</c>
+              <c>13</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>12</c>
+              <c>13</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>13</c>
+              <c>13</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>14</c>
+              <c>13</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>15</c>
+              <c>13</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>1</c>
+              <c>14</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>2</c>
+              <c>14</c>
+              <c>E</c>
+            </r>
+            <r>
+              <c>3</c>
+              <c>14</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>4</c>
+              <c>14</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>5</c>
+              <c>14</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>6</c>
+              <c>14</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>7</c>
+              <c>14</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>8</c>
+              <c>14</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>9</c>
+              <c>14</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>10</c>
+              <c>14</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>11</c>
+              <c>14</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>12</c>
+              <c>14</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>13</c>
+              <c>14</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>14</c>
+              <c>14</c>
+              <c>.</c>
+            </r>
+            <r>
+              <c>15</c>
+              <c>14</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>1</c>
+              <c>15</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>2</c>
+              <c>15</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>3</c>
+              <c>15</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>4</c>
+              <c>15</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>5</c>
+              <c>15</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>6</c>
+              <c>15</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>7</c>
+              <c>15</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>8</c>
+              <c>15</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>9</c>
+              <c>15</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>10</c>
+              <c>15</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>11</c>
+              <c>15</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>12</c>
+              <c>15</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>13</c>
+              <c>15</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>14</c>
+              <c>15</c>
+              <c>#</c>
+            </r>
+            <r>
+              <c>15</c>
+              <c>15</c>
+              <c>#</c>
+            </r>
+          </Data>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="R" source="TextInput:" type="Int32" />
+            <Field name="C" source="TextInput:" type="Int32" />
+            <Field name="value" size="2147483647" source="TextInput:" type="V_String" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxTextInput" />
+    </Node>
+    <Node ToolID="14">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+        <Position x="162" y="222" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <FormulaFields>
+            <FormulaField expression="IF [value] != &quot;#&quot; THEN &quot;.&quot; ELSE [value] ENDIF" field="value" size="2147483647" type="V_String" enabled="true" />
+          </FormulaFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText><![CDATA[value = IF [value] != "#" THEN "." ELSE [value] ENDIF
+]]></DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="R" source="TextInput:" type="Int32" />
+            <Field name="C" source="TextInput:" type="Int32" />
+            <Field name="value" size="2147483647" source="Formula: IF [value] != &quot;#&quot; THEN &quot;.&quot; ELSE [value] ENDIF" type="V_String" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+    </Node>
+    <Node ToolID="15">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Filter.Filter">
+        <Position x="270" y="222" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Mode>Simple</Mode>
+          <Simple>
+            <Operator>=</Operator>
+            <Field>value</Field>
+            <Operands>
+              <IgnoreTimeInDateTime>True</IgnoreTimeInDateTime>
+              <DateType>fixed</DateType>
+              <PeriodDate>2024-12-18 08:19:31</PeriodDate>
+              <PeriodType>
+              </PeriodType>
+              <PeriodCount>0</PeriodCount>
+              <Operand>.</Operand>
+              <StartDate>2024-12-18 08:19:31</StartDate>
+              <EndDate>2024-12-18 08:19:31</EndDate>
+            </Operands>
+          </Simple>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>[value] = "."</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="True">
+          <RecordInfo>
+            <Field name="R" source="TextInput:" type="Int32" />
+            <Field name="C" source="TextInput:" type="Int32" />
+            <Field name="value" size="2147483647" source="Formula: IF [value] != &quot;#&quot; THEN &quot;.&quot; ELSE [value] ENDIF" type="V_String" />
+          </RecordInfo>
+        </MetaInfo>
+        <MetaInfo connection="False">
+          <RecordInfo>
+            <Field name="R" source="TextInput:" type="Int32" />
+            <Field name="C" source="TextInput:" type="Int32" />
+            <Field name="value" size="2147483647" source="Formula: IF [value] != &quot;#&quot; THEN &quot;.&quot; ELSE [value] ENDIF" type="V_String" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFilter" />
+    </Node>
+    <Node ToolID="16">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+        <Position x="390" y="210" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <FormulaFields>
+            <FormulaField expression="[R]" field="R&gt;" size="4" type="Int32" enabled="true" />
+            <FormulaField expression="[C] + 1" field="C&gt;" size="4" type="Int32" enabled="true" />
+          </FormulaFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText><![CDATA[R> = [R]
+C> = [C] + 1
+]]></DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="R" source="TextInput:" type="Int32" />
+            <Field name="C" source="TextInput:" type="Int32" />
+            <Field name="value" size="2147483647" source="Formula: IF [value] != &quot;#&quot; THEN &quot;.&quot; ELSE [value] ENDIF" type="V_String" />
+            <Field name="R&gt;" source="Formula: [R]" type="Int32" />
+            <Field name="C&gt;" source="Formula: [C] + 1" type="Int32" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+    </Node>
+    <Node ToolID="17">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Join.Join">
+        <Position x="498" y="222" />
+      </GuiSettings>
+      <Properties>
+        <Configuration joinByRecordPos="False">
+          <JoinInfo connection="Left">
+            <Field field="R&gt;" />
+            <Field field="C&gt;" />
+          </JoinInfo>
+          <JoinInfo connection="Right">
+            <Field field="R" />
+            <Field field="C" />
+          </JoinInfo>
+          <SelectConfiguration>
+            <Configuration outputConnection="Join">
+              <OrderChanged value="True" />
+              <CommaDecimal value="False" />
+              <SelectFields>
+                <SelectField field="Left_R" selected="True" input="Left_" />
+                <SelectField field="Left_C" selected="True" input="Left_" />
+                <SelectField field="Left_value" selected="True" input="Left_" />
+                <SelectField field="Left_R&gt;" selected="True" input="Left_" />
+                <SelectField field="Left_C&gt;" selected="True" input="Left_" />
+                <SelectField field="Right_R" selected="False" rename="Right_R" input="Right_" />
+                <SelectField field="Right_C" selected="False" rename="Right_C" input="Right_" />
+                <SelectField field="Right_value" selected="True" rename="value&gt;" input="Right_" />
+                <SelectField field="*Unknown" selected="True" />
+              </SelectFields>
+            </Configuration>
+          </SelectConfiguration>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Left">
+          <RecordInfo>
+            <Field name="R" source="TextInput:" type="Int32" />
+            <Field name="C" source="TextInput:" type="Int32" />
+            <Field name="value" size="2147483647" source="Formula: IF [value] != &quot;#&quot; THEN &quot;.&quot; ELSE [value] ENDIF" type="V_String" />
+            <Field name="R&gt;" source="Formula: [R]" type="Int32" />
+            <Field name="C&gt;" source="Formula: [C] + 1" type="Int32" />
+          </RecordInfo>
+        </MetaInfo>
+        <MetaInfo connection="Join">
+          <RecordInfo>
+            <Field name="R" source="TextInput:" type="Int32" />
+            <Field name="C" source="TextInput:" type="Int32" />
+            <Field name="value" size="2147483647" source="Formula: IF [value] != &quot;#&quot; THEN &quot;.&quot; ELSE [value] ENDIF" type="V_String" />
+            <Field name="R&gt;" source="Formula: [R]" type="Int32" />
+            <Field name="C&gt;" source="Formula: [C] + 1" type="Int32" />
+            <Field name="value&gt;" size="2147483647" source="Formula: IF [value] != &quot;#&quot; THEN &quot;.&quot; ELSE [value] ENDIF" type="V_String" />
+          </RecordInfo>
+        </MetaInfo>
+        <MetaInfo connection="Right">
+          <RecordInfo>
+            <Field name="R" source="TextInput:" type="Int32" />
+            <Field name="C" source="TextInput:" type="Int32" />
+            <Field name="value" size="2147483647" source="Formula: IF [value] != &quot;#&quot; THEN &quot;.&quot; ELSE [value] ENDIF" type="V_String" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxJoin" />
+    </Node>
+    <Node ToolID="18">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+        <Position x="390" y="306" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <FormulaFields>
+            <FormulaField expression="[R]" field="R&lt;" size="4" type="Int32" enabled="true" />
+            <FormulaField expression="[C] - 1" field="C&lt;" size="4" type="Int32" enabled="true" />
+          </FormulaFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText><![CDATA[R< = [R]
+C< = [C] - 1
+]]></DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="R" source="TextInput:" type="Int32" />
+            <Field name="C" source="TextInput:" type="Int32" />
+            <Field name="value" size="2147483647" source="Formula: IF [value] != &quot;#&quot; THEN &quot;.&quot; ELSE [value] ENDIF" type="V_String" />
+            <Field name="R&lt;" source="Formula: [R]" type="Int32" />
+            <Field name="C&lt;" source="Formula: [C] - 1" type="Int32" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+    </Node>
+    <Node ToolID="19">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Join.Join">
+        <Position x="498" y="318" />
+      </GuiSettings>
+      <Properties>
+        <Configuration joinByRecordPos="False">
+          <JoinInfo connection="Left">
+            <Field field="R&lt;" />
+            <Field field="C&lt;" />
+          </JoinInfo>
+          <JoinInfo connection="Right">
+            <Field field="R" />
+            <Field field="C" />
+          </JoinInfo>
+          <SelectConfiguration>
+            <Configuration outputConnection="Join">
+              <OrderChanged value="False" />
+              <CommaDecimal value="False" />
+              <SelectFields>
+                <SelectField field="Right_R" selected="False" rename="Right_R" input="Right_" />
+                <SelectField field="Right_C" selected="False" rename="Right_C" input="Right_" />
+                <SelectField field="Right_value" selected="True" rename="value&lt;" input="Right_" />
+                <SelectField field="*Unknown" selected="True" />
+              </SelectFields>
+            </Configuration>
+          </SelectConfiguration>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Left">
+          <RecordInfo>
+            <Field name="R" source="TextInput:" type="Int32" />
+            <Field name="C" source="TextInput:" type="Int32" />
+            <Field name="value" size="2147483647" source="Formula: IF [value] != &quot;#&quot; THEN &quot;.&quot; ELSE [value] ENDIF" type="V_String" />
+            <Field name="R&lt;" source="Formula: [R]" type="Int32" />
+            <Field name="C&lt;" source="Formula: [C] - 1" type="Int32" />
+          </RecordInfo>
+        </MetaInfo>
+        <MetaInfo connection="Join">
+          <RecordInfo>
+            <Field name="R" source="TextInput:" type="Int32" />
+            <Field name="C" source="TextInput:" type="Int32" />
+            <Field name="value" size="2147483647" source="Formula: IF [value] != &quot;#&quot; THEN &quot;.&quot; ELSE [value] ENDIF" type="V_String" />
+            <Field name="R&lt;" source="Formula: [R]" type="Int32" />
+            <Field name="C&lt;" source="Formula: [C] - 1" type="Int32" />
+            <Field name="value&lt;" size="2147483647" source="Formula: IF [value] != &quot;#&quot; THEN &quot;.&quot; ELSE [value] ENDIF" type="V_String" />
+          </RecordInfo>
+        </MetaInfo>
+        <MetaInfo connection="Right">
+          <RecordInfo>
+            <Field name="R" source="TextInput:" type="Int32" />
+            <Field name="C" source="TextInput:" type="Int32" />
+            <Field name="value" size="2147483647" source="Formula: IF [value] != &quot;#&quot; THEN &quot;.&quot; ELSE [value] ENDIF" type="V_String" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxJoin" />
+    </Node>
+    <Node ToolID="20">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+        <Position x="390" y="402" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <FormulaFields>
+            <FormulaField expression="[R] - 1" field="R^" size="4" type="Int32" enabled="true" />
+            <FormulaField expression="[C]" field="C^" size="4" type="Int32" enabled="true" />
+          </FormulaFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText><![CDATA[R^ = [R] - 1
+C^ = [C]
+]]></DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="R" source="TextInput:" type="Int32" />
+            <Field name="C" source="TextInput:" type="Int32" />
+            <Field name="value" size="2147483647" source="Formula: IF [value] != &quot;#&quot; THEN &quot;.&quot; ELSE [value] ENDIF" type="V_String" />
+            <Field name="R^" source="Formula: [R] - 1" type="Int32" />
+            <Field name="C^" source="Formula: [C]" type="Int32" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+    </Node>
+    <Node ToolID="21">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Join.Join">
+        <Position x="498" y="414" />
+      </GuiSettings>
+      <Properties>
+        <Configuration joinByRecordPos="False">
+          <JoinInfo connection="Left">
+            <Field field="R^" />
+            <Field field="C^" />
+          </JoinInfo>
+          <JoinInfo connection="Right">
+            <Field field="R" />
+            <Field field="C" />
+          </JoinInfo>
+          <SelectConfiguration>
+            <Configuration outputConnection="Join">
+              <OrderChanged value="False" />
+              <CommaDecimal value="False" />
+              <SelectFields>
+                <SelectField field="Right_R" selected="False" rename="Right_R" input="Right_" />
+                <SelectField field="Right_C" selected="False" rename="Right_C" input="Right_" />
+                <SelectField field="Right_value" selected="True" rename="value^" input="Right_" />
+                <SelectField field="*Unknown" selected="True" />
+              </SelectFields>
+            </Configuration>
+          </SelectConfiguration>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Left">
+          <RecordInfo>
+            <Field name="R" source="TextInput:" type="Int32" />
+            <Field name="C" source="TextInput:" type="Int32" />
+            <Field name="value" size="2147483647" source="Formula: IF [value] != &quot;#&quot; THEN &quot;.&quot; ELSE [value] ENDIF" type="V_String" />
+            <Field name="R^" source="Formula: [R] - 1" type="Int32" />
+            <Field name="C^" source="Formula: [C]" type="Int32" />
+          </RecordInfo>
+        </MetaInfo>
+        <MetaInfo connection="Join">
+          <RecordInfo>
+            <Field name="R" source="TextInput:" type="Int32" />
+            <Field name="C" source="TextInput:" type="Int32" />
+            <Field name="value" size="2147483647" source="Formula: IF [value] != &quot;#&quot; THEN &quot;.&quot; ELSE [value] ENDIF" type="V_String" />
+            <Field name="R^" source="Formula: [R] - 1" type="Int32" />
+            <Field name="C^" source="Formula: [C]" type="Int32" />
+            <Field name="value^" size="2147483647" source="Formula: IF [value] != &quot;#&quot; THEN &quot;.&quot; ELSE [value] ENDIF" type="V_String" />
+          </RecordInfo>
+        </MetaInfo>
+        <MetaInfo connection="Right">
+          <RecordInfo>
+            <Field name="R" source="TextInput:" type="Int32" />
+            <Field name="C" source="TextInput:" type="Int32" />
+            <Field name="value" size="2147483647" source="Formula: IF [value] != &quot;#&quot; THEN &quot;.&quot; ELSE [value] ENDIF" type="V_String" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxJoin" />
+    </Node>
+    <Node ToolID="22">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+        <Position x="390" y="498" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <FormulaFields>
+            <FormulaField expression="[R] + 1" field="Rv" size="4" type="Int32" enabled="true" />
+            <FormulaField expression="[C]" field="Cv" size="4" type="Int32" enabled="true" />
+          </FormulaFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText><![CDATA[Rv = [R] + 1
+Cv = [C]
+]]></DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="R" source="TextInput:" type="Int32" />
+            <Field name="C" source="TextInput:" type="Int32" />
+            <Field name="value" size="2147483647" source="Formula: IF [value] != &quot;#&quot; THEN &quot;.&quot; ELSE [value] ENDIF" type="V_String" />
+            <Field name="Rv" source="Formula: [R] + 1" type="Int32" />
+            <Field name="Cv" source="Formula: [C]" type="Int32" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+    </Node>
+    <Node ToolID="23">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Join.Join">
+        <Position x="498" y="510" />
+      </GuiSettings>
+      <Properties>
+        <Configuration joinByRecordPos="False">
+          <JoinInfo connection="Left">
+            <Field field="Rv" />
+            <Field field="Cv" />
+          </JoinInfo>
+          <JoinInfo connection="Right">
+            <Field field="R" />
+            <Field field="C" />
+          </JoinInfo>
+          <SelectConfiguration>
+            <Configuration outputConnection="Join">
+              <OrderChanged value="False" />
+              <CommaDecimal value="False" />
+              <SelectFields>
+                <SelectField field="Right_R" selected="False" rename="Right_R" input="Right_" />
+                <SelectField field="Right_C" selected="False" rename="Right_C" input="Right_" />
+                <SelectField field="Right_value" selected="True" rename="valuev" input="Right_" />
+                <SelectField field="*Unknown" selected="True" />
+              </SelectFields>
+            </Configuration>
+          </SelectConfiguration>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Left">
+          <RecordInfo>
+            <Field name="R" source="TextInput:" type="Int32" />
+            <Field name="C" source="TextInput:" type="Int32" />
+            <Field name="value" size="2147483647" source="Formula: IF [value] != &quot;#&quot; THEN &quot;.&quot; ELSE [value] ENDIF" type="V_String" />
+            <Field name="Rv" source="Formula: [R] + 1" type="Int32" />
+            <Field name="Cv" source="Formula: [C]" type="Int32" />
+          </RecordInfo>
+        </MetaInfo>
+        <MetaInfo connection="Join">
+          <RecordInfo>
+            <Field name="R" source="TextInput:" type="Int32" />
+            <Field name="C" source="TextInput:" type="Int32" />
+            <Field name="value" size="2147483647" source="Formula: IF [value] != &quot;#&quot; THEN &quot;.&quot; ELSE [value] ENDIF" type="V_String" />
+            <Field name="Rv" source="Formula: [R] + 1" type="Int32" />
+            <Field name="Cv" source="Formula: [C]" type="Int32" />
+            <Field name="valuev" size="2147483647" source="Formula: IF [value] != &quot;#&quot; THEN &quot;.&quot; ELSE [value] ENDIF" type="V_String" />
+          </RecordInfo>
+        </MetaInfo>
+        <MetaInfo connection="Right">
+          <RecordInfo>
+            <Field name="R" source="TextInput:" type="Int32" />
+            <Field name="C" source="TextInput:" type="Int32" />
+            <Field name="value" size="2147483647" source="Formula: IF [value] != &quot;#&quot; THEN &quot;.&quot; ELSE [value] ENDIF" type="V_String" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxJoin" />
+    </Node>
+    <Node ToolID="24">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Union.Union">
+        <Position x="618" y="222" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <ByName_ErrorMode>Ignore</ByName_ErrorMode>
+          <ByName_OutputMode>All</ByName_OutputMode>
+          <Mode>ByPos</Mode>
+          <SetOutputOrder value="False" />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="R" source="TextInput:" type="Int32" />
+            <Field name="C" source="TextInput:" type="Int32" />
+            <Field name="value" size="2147483647" source="Formula: IF [value] != &quot;#&quot; THEN &quot;.&quot; ELSE [value] ENDIF" type="V_String" />
+            <Field name="R&gt;" source="Formula: (Multiple Sources)" type="Int32" />
+            <Field name="C&gt;" source="Formula: (Multiple Sources)" type="Int32" />
+            <Field name="value&gt;" size="2147483647" source="Formula: IF [value] != &quot;#&quot; THEN &quot;.&quot; ELSE [value] ENDIF" type="V_String" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxUnion" />
+    </Node>
+    <Node ToolID="26">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Filter.Filter">
+        <Position x="714" y="222" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Mode>Simple</Mode>
+          <Simple>
+            <Operator>=</Operator>
+            <Field>value&gt;</Field>
+            <Operands>
+              <IgnoreTimeInDateTime>True</IgnoreTimeInDateTime>
+              <DateType>fixed</DateType>
+              <PeriodDate>2024-12-18 08:36:59</PeriodDate>
+              <PeriodType>
+              </PeriodType>
+              <PeriodCount>0</PeriodCount>
+              <Operand>.</Operand>
+              <StartDate>2024-12-18 08:36:59</StartDate>
+              <EndDate>2024-12-18 08:36:59</EndDate>
+            </Operands>
+          </Simple>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>[value&gt;] = "."</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="True">
+          <RecordInfo>
+            <Field name="R" source="TextInput:" type="Int32" />
+            <Field name="C" source="TextInput:" type="Int32" />
+            <Field name="value" size="2147483647" source="Formula: IF [value] != &quot;#&quot; THEN &quot;.&quot; ELSE [value] ENDIF" type="V_String" />
+            <Field name="R&gt;" source="Formula: (Multiple Sources)" type="Int32" />
+            <Field name="C&gt;" source="Formula: (Multiple Sources)" type="Int32" />
+            <Field name="value&gt;" size="2147483647" source="Formula: IF [value] != &quot;#&quot; THEN &quot;.&quot; ELSE [value] ENDIF" type="V_String" />
+          </RecordInfo>
+        </MetaInfo>
+        <MetaInfo connection="False">
+          <RecordInfo>
+            <Field name="R" source="TextInput:" type="Int32" />
+            <Field name="C" source="TextInput:" type="Int32" />
+            <Field name="value" size="2147483647" source="Formula: IF [value] != &quot;#&quot; THEN &quot;.&quot; ELSE [value] ENDIF" type="V_String" />
+            <Field name="R&gt;" source="Formula: (Multiple Sources)" type="Int32" />
+            <Field name="C&gt;" source="Formula: (Multiple Sources)" type="Int32" />
+            <Field name="value&gt;" size="2147483647" source="Formula: IF [value] != &quot;#&quot; THEN &quot;.&quot; ELSE [value] ENDIF" type="V_String" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFilter" />
+    </Node>
+    <Node ToolID="27">
+      <GuiSettings Plugin="AlteryxSpatialPluginsGui.Summarize.Summarize">
+        <Position x="822" y="222" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <SummarizeFields>
+            <SummarizeField field="R" action="GroupBy" rename="R" />
+            <SummarizeField field="C" action="GroupBy" rename="C" />
+            <SummarizeField field="value" action="GroupBy" rename="value" />
+            <SummarizeField field="value&gt;" action="Count" rename="Count" />
+          </SummarizeFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="R" source="Summarize: GroupBy - R" type="Int32" />
+            <Field name="C" source="Summarize: GroupBy - C" type="Int32" />
+            <Field name="value" size="2147483647" source="Summarize: GroupBy - value" type="V_String" />
+            <Field name="Count" source="Summarize: Count - R" type="Int64" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxSpatialPluginsEngine.dll" EngineDllEntryPoint="AlteryxSummarize" />
+    </Node>
+  </Nodes>
+  <Connections>
+    <Connection>
+      <Origin ToolID="1" Connection="Output" />
+      <Destination ToolID="5" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="5" Connection="Output" />
+      <Destination ToolID="12" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="13" Connection="Output" />
+      <Destination ToolID="14" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="14" Connection="Output" />
+      <Destination ToolID="15" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="14" Connection="Output" />
+      <Destination ToolID="17" Connection="Right" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="16" Connection="Output" />
+      <Destination ToolID="17" Connection="Left" />
+    </Connection>
+    <Connection Wireless="True">
+      <Origin ToolID="14" Connection="Output" />
+      <Destination ToolID="19" Connection="Right" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="18" Connection="Output" />
+      <Destination ToolID="19" Connection="Left" />
+    </Connection>
+    <Connection Wireless="True">
+      <Origin ToolID="14" Connection="Output" />
+      <Destination ToolID="21" Connection="Right" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="20" Connection="Output" />
+      <Destination ToolID="21" Connection="Left" />
+    </Connection>
+    <Connection Wireless="True">
+      <Origin ToolID="14" Connection="Output" />
+      <Destination ToolID="23" Connection="Right" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="22" Connection="Output" />
+      <Destination ToolID="23" Connection="Left" />
+    </Connection>
+    <Connection name="&gt;">
+      <Origin ToolID="15" Connection="True" />
+      <Destination ToolID="16" Connection="Input" />
+    </Connection>
+    <Connection name="&lt;">
+      <Origin ToolID="15" Connection="True" />
+      <Destination ToolID="18" Connection="Input" />
+    </Connection>
+    <Connection name="^">
+      <Origin ToolID="15" Connection="True" />
+      <Destination ToolID="20" Connection="Input" />
+    </Connection>
+    <Connection name="v">
+      <Origin ToolID="15" Connection="True" />
+      <Destination ToolID="22" Connection="Input" />
+    </Connection>
+    <Connection name="#1">
+      <Origin ToolID="17" Connection="Join" />
+      <Destination ToolID="24" Connection="Input" />
+    </Connection>
+    <Connection name="#2">
+      <Origin ToolID="19" Connection="Join" />
+      <Destination ToolID="24" Connection="Input" />
+    </Connection>
+    <Connection name="#3">
+      <Origin ToolID="21" Connection="Join" />
+      <Destination ToolID="24" Connection="Input" />
+    </Connection>
+    <Connection name="#4">
+      <Origin ToolID="23" Connection="Join" />
+      <Destination ToolID="24" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="24" Connection="Output" />
+      <Destination ToolID="26" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="26" Connection="True" />
+      <Destination ToolID="27" Connection="Input" />
+    </Connection>
+  </Connections>
+  <Properties>
+    <Memory default="True" />
+    <GlobalRecordLimit value="0" />
+    <TempFiles default="True" />
+    <Annotation on="True" includeToolName="False" />
+    <ConvErrorLimit value="10" />
+    <ConvErrorLimit_Stop value="False" />
+    <CancelOnError value="False" />
+    <DisableBrowse value="False" />
+    <EnablePerformanceProfiling value="False" />
+    <RunWithE2 value="True" />
+    <SortedGrouping value="True" />
+    <PredictiveToolsCodePage value="1252" />
+    <DisableAllOutput value="False" />
+    <ShowAllMacroMessages value="False" />
+    <ShowConnectionStatusIsOn value="True" />
+    <ShowConnectionStatusOnlyWhenRunning value="True" />
+    <ZoomLevel value="0" />
+    <LayoutType>Horizontal</LayoutType>
+    <IsTemplate value="False" />
+    <MetaInfo>
+      <NameIsFileName value="True" />
+      <Name>work</Name>
+      <Description />
+      <RootToolName />
+      <ToolVersion />
+      <ToolInDb value="False" />
+      <CategoryName />
+      <SearchTags />
+      <Author />
+      <Company />
+      <Copyright />
+      <DescriptionLink actual="" displayed="" />
+      <Example>
+        <Description />
+        <File />
+      </Example>
+      <WorkflowId value="87062e11-3028-40c0-ae7a-b80a9ef64427" />
+      <Telemetry>
+        <PreviousWorkflowId value="fa44755c-7ac6-4088-a37d-08edebace66c" />
+        <OriginWorkflowId value="fa44755c-7ac6-4088-a37d-08edebace66c" />
+      </Telemetry>
+      <PlatformWorkflowId value="" />
+    </MetaInfo>
+    <Events>
+      <Enabled value="True" />
+    </Events>
+    <RuntimeProperties>
+      <Actions />
+      <Questions>
+        <Question>
+          <Type>Tab</Type>
+          <Description>Questions</Description>
+          <Name>Tab (2)</Name>
+          <ToolId value="2" />
+          <Questions>
+            <Question>
+              <Type>MacroInput</Type>
+              <Description />
+              <Name>Macro Input (1)</Name>
+              <ToolId value="1" />
+            </Question>
+          </Questions>
+        </Question>
+      </Questions>
+      <ModuleType>Macro</ModuleType>
+      <MacroCustomHelp value="False" />
+      <MacroDynamicOutputFields value="False" />
+      <MacroImageStd value="39" />
+      <MacroInputs />
+      <MacroOutputs />
+      <Wiz_CustomHelp value="False" />
+      <Wiz_CustomGraphic value="False" />
+      <Wiz_ShowOutput value="True" />
+      <Wiz_OpenOutputTools>
+        <Tool ToolId="1" Selected="True" />
+      </Wiz_OpenOutputTools>
+      <Wiz_OutputMessage />
+      <Wiz_NoOutputFilesMessage />
+      <Wiz_ChainRunWizard />
+    </RuntimeProperties>
+  </Properties>
+</AlteryxDocument>
