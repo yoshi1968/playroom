@@ -1,0 +1,181 @@
+<?xml version="1.0"?>
+<AlteryxDocument yxmdVer="2024.1" RunE2="T">
+  <Nodes>
+    <Node ToolID="1">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.TextInput.TextInput">
+        <Position x="78" y="126" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <NumRows value="5" />
+          <Fields>
+            <Field name="section1" />
+            <Field name="section2" />
+            <Field name="section3" />
+          </Fields>
+          <Data>
+            <r>
+              <c>cd</c>
+              <c>abc</c>
+              <c>a</c>
+            </r>
+            <r>
+              <c>cd</c>
+              <c>acb</c>
+              <c>b</c>
+            </r>
+            <r>
+              <c>cf</c>
+              <c>acb</c>
+              <c>a</c>
+            </r>
+            <r>
+              <c>cf</c>
+              <c>abc</c>
+              <c>b</c>
+            </r>
+            <r>
+              <c>cf</c>
+              <c>ccc</c>
+              <c>c</c>
+            </r>
+          </Data>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxTextInput" />
+    </Node>
+    <Node ToolID="2">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.TextInput.TextInput">
+        <Position x="78" y="186" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <NumRows value="3" />
+          <Fields>
+            <Field name="section1" />
+            <Field name="section1x" />
+            <Field name="section2" />
+            <Field name="section2x" />
+            <Field name="section3" />
+            <Field name="section3x" />
+          </Fields>
+          <Data>
+            <r>
+              <c>cd</c>
+              <c>xx</c>
+              <c>ccc</c>
+              <c>ff</c>
+              <c>a</c>
+              <c>tyy</c>
+            </r>
+            <r>
+              <c>cf</c>
+              <c>yy</c>
+              <c>abc</c>
+              <c>gg</c>
+              <c>b</c>
+              <c>yw</c>
+            </r>
+            <r>
+              <c />
+              <c />
+              <c>acb</c>
+              <c>bb</c>
+              <c>c</c>
+              <c>np</c>
+            </r>
+          </Data>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxTextInput" />
+    </Node>
+    <Node ToolID="3">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.TextInput.TextInput">
+        <Position x="78" y="66" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <NumRows value="3" />
+          <Fields>
+            <Field name="field" />
+          </Fields>
+          <Data>
+            <r>
+              <c>section1</c>
+            </r>
+            <r>
+              <c>section2</c>
+            </r>
+            <r>
+              <c>section3</c>
+            </r>
+          </Data>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxTextInput" />
+    </Node>
+  </Nodes>
+  <Connections />
+  <Properties>
+    <Memory default="True" />
+    <GlobalRecordLimit value="0" />
+    <TempFiles default="True" />
+    <Annotation on="True" includeToolName="False" />
+    <ConvErrorLimit value="10" />
+    <ConvErrorLimit_Stop value="False" />
+    <CancelOnError value="False" />
+    <DisableBrowse value="False" />
+    <EnablePerformanceProfiling value="False" />
+    <RunWithE2 value="True" />
+    <PredictiveToolsCodePage value="1252" />
+    <DisableAllOutput value="False" />
+    <ShowAllMacroMessages value="False" />
+    <ShowConnectionStatusIsOn value="True" />
+    <ShowConnectionStatusOnlyWhenRunning value="True" />
+    <ZoomLevel value="0" />
+    <LayoutType>Horizontal</LayoutType>
+    <IsTemplate value="False" />
+    <MetaInfo>
+      <NameIsFileName value="True" />
+      <Name>workflow</Name>
+      <Description />
+      <RootToolName />
+      <ToolVersion />
+      <ToolInDb value="False" />
+      <CategoryName />
+      <SearchTags />
+      <Author />
+      <Company />
+      <Copyright />
+      <DescriptionLink actual="" displayed="" />
+      <Example>
+        <Description />
+        <File />
+      </Example>
+      <WorkflowId value="964c14c1-7c4d-4426-85fc-21f122d56773" />
+      <Telemetry>
+        <PreviousWorkflowId value="3b5bc392-1839-4ff3-9f22-06312e7dfe18" />
+        <OriginWorkflowId value="3b5bc392-1839-4ff3-9f22-06312e7dfe18" />
+      </Telemetry>
+      <PlatformWorkflowId value="" />
+    </MetaInfo>
+    <Events>
+      <Enabled value="True" />
+    </Events>
+  </Properties>
+</AlteryxDocument>

@@ -1,0 +1,281 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<AlteryxDocument yxmdVer="2024.2" RunE2="T">
+  <Nodes>
+    <Node ToolID="37">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.TextInput.TextInput">
+        <Position x="174" y="126" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <NumRows value="5" />
+          <Fields>
+            <Field name="section1" />
+            <Field name="section2" />
+            <Field name="section3" />
+          </Fields>
+          <Data>
+            <r>
+              <c>cd</c>
+              <c>abc</c>
+              <c>a</c>
+            </r>
+            <r>
+              <c>cd</c>
+              <c>acb</c>
+              <c>b</c>
+            </r>
+            <r>
+              <c>cf</c>
+              <c>acb</c>
+              <c>a</c>
+            </r>
+            <r>
+              <c>cf</c>
+              <c>abc</c>
+              <c>b</c>
+            </r>
+            <r>
+              <c>cf</c>
+              <c>ccc</c>
+              <c>c</c>
+            </r>
+          </Data>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="section1" size="2147483647" source="TextInput:" type="V_String" />
+            <Field name="section2" size="2147483647" source="TextInput:" type="V_String" />
+            <Field name="section3" size="2147483647" source="TextInput:" type="V_String" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxTextInput" />
+    </Node>
+    <Node ToolID="38">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.TextInput.TextInput">
+        <Position x="174" y="222" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <NumRows value="3" />
+          <Fields>
+            <Field name="section1" />
+            <Field name="section1x" />
+            <Field name="section2" />
+            <Field name="section2x" />
+            <Field name="section3" />
+            <Field name="section3x" />
+          </Fields>
+          <Data>
+            <r>
+              <c>cd</c>
+              <c>xx</c>
+              <c>ccc</c>
+              <c>ff</c>
+              <c>a</c>
+              <c>tyy</c>
+            </r>
+            <r>
+              <c>cf</c>
+              <c>yy</c>
+              <c>abc</c>
+              <c>gg</c>
+              <c>b</c>
+              <c>yw</c>
+            </r>
+            <r>
+              <c />
+              <c />
+              <c>acb</c>
+              <c>bb</c>
+              <c>c</c>
+              <c>np</c>
+            </r>
+          </Data>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="section1" size="2147483647" source="TextInput:" type="V_String" />
+            <Field name="section1x" size="2147483647" source="TextInput:" type="V_String" />
+            <Field name="section2" size="2147483647" source="TextInput:" type="V_String" />
+            <Field name="section2x" size="2147483647" source="TextInput:" type="V_String" />
+            <Field name="section3" size="2147483647" source="TextInput:" type="V_String" />
+            <Field name="section3x" size="2147483647" source="TextInput:" type="V_String" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxTextInput" />
+    </Node>
+    <Node ToolID="39">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.BrowseV2.BrowseV2">
+        <Position x="462" y="90" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <TempFile>C:\Users\KIERAN~1.RID\AppData\Local\Temp\Alteryx\Engine_2556_e4b7fb3bf1e54fa6ac01640059d79c09_\Engine_2556_af7399b056744f8bab5c566ce61f1225~.yxdb</TempFile>
+          <TempFileDataProfiling />
+          <Layout>
+            <ViewMode>Single</ViewMode>
+            <ViewSize value="100" />
+            <View1>
+              <DefaultTab>Profile</DefaultTab>
+              <Hints>
+                <Table />
+              </Hints>
+            </View1>
+            <View2 />
+          </Layout>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxBrowseV2" />
+    </Node>
+    <Node ToolID="40">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.TextInput.TextInput">
+        <Position x="162" y="66" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <NumRows value="3" />
+          <Fields>
+            <Field name="field" />
+          </Fields>
+          <Data>
+            <r>
+              <c>section1</c>
+            </r>
+            <r>
+              <c>section2</c>
+            </r>
+            <r>
+              <c>section3</c>
+            </r>
+          </Data>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="field" size="2147483647" source="TextInput:" type="V_String" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxTextInput" />
+    </Node>
+    <Node ToolID="41">
+      <GuiSettings>
+        <Position x="330" y="102" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Value name="BatchMacroGroupBy"><![CDATA[Control=field
+]]></Value>
+          <Value name="ControlParams"><![CDATA[Control Parameter (6)=field
+]]></Value>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+        <Dependencies>
+          <Implicit />
+        </Dependencies>
+        <MetaInfo connection="Output5">
+          <RecordInfo>
+            <Field name="section1" size="2147483647" source="TextInput:" type="V_String" />
+            <Field name="section2" size="2147483647" source="TextInput:" type="V_String" />
+            <Field name="section3" size="2147483647" source="TextInput:" type="V_String" />
+            <Field name="section1x" size="2147483647" source="TextInput:" type="V_String" />
+            <Field name="section2x" size="2147483647" source="TextInput:" type="V_String" />
+            <Field name="section3x" size="2147483647" source="TextInput:" type="V_String" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings Macro="FandR Macro_v1.yxmc" />
+    </Node>
+  </Nodes>
+  <Connections>
+    <Connection>
+      <Origin ToolID="37" Connection="Output" />
+      <Destination ToolID="41" Connection="Input1" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="38" Connection="Output" />
+      <Destination ToolID="41" Connection="Input2" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="40" Connection="Output" />
+      <Destination ToolID="41" Connection="Control" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="41" Connection="Output5" />
+      <Destination ToolID="39" Connection="Input" />
+    </Connection>
+  </Connections>
+  <Properties>
+    <Memory default="True" />
+    <GlobalRecordLimit value="0" />
+    <TempFiles default="True" />
+    <Annotation on="True" includeToolName="False" />
+    <ConvErrorLimit value="10" />
+    <ConvErrorLimit_Stop value="False" />
+    <CancelOnError value="False" />
+    <DisableBrowse value="False" />
+    <EnablePerformanceProfiling value="False" />
+    <RunWithE2 value="True" />
+    <SortedGrouping value="True" />
+    <PredictiveToolsCodePage value="1252" />
+    <DisableAllOutput value="False" />
+    <ShowAllMacroMessages value="False" />
+    <ShowConnectionStatusIsOn value="True" />
+    <ShowConnectionStatusOnlyWhenRunning value="True" />
+    <ZoomLevel value="0" />
+    <LayoutType>Horizontal</LayoutType>
+    <IsTemplate value="False" />
+    <MetaInfo>
+      <NameIsFileName value="True" />
+      <Name>F+R Alteryx Community</Name>
+      <Description />
+      <RootToolName />
+      <ToolVersion />
+      <ToolInDb value="False" />
+      <CategoryName />
+      <SearchTags />
+      <Author />
+      <Company />
+      <Copyright />
+      <DescriptionLink actual="" displayed="" />
+      <Example>
+        <Description />
+        <File />
+      </Example>
+      <WorkflowId value="92949c46-428a-4373-9ae5-79a0b10d841e" />
+      <Telemetry>
+        <PreviousWorkflowId value="89b05c65-4f8d-4e53-a0d5-ca74e7c0e0e4" />
+        <OriginWorkflowId value="bc02e207-10a2-484e-972d-be4d4e8b1f4b" />
+      </Telemetry>
+      <PlatformWorkflowId value="" />
+    </MetaInfo>
+    <Events>
+      <Enabled value="True" />
+    </Events>
+  </Properties>
+</AlteryxDocument>
