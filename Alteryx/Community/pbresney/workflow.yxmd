@@ -1,0 +1,203 @@
+<?xml version="1.0"?>
+<AlteryxDocument yxmdVer="2024.1" RunE2="T">
+  <Nodes>
+    <Node ToolID="1">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.TextInput.TextInput">
+        <Position x="54" y="54" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <NumRows value="19" />
+          <Fields>
+            <Field name="Building" />
+            <Field name="Employee" />
+          </Fields>
+          <Data>
+            <r>
+              <c>A</c>
+              <c>1</c>
+            </r>
+            <r>
+              <c>A</c>
+              <c>3</c>
+            </r>
+            <r>
+              <c>B</c>
+              <c>5</c>
+            </r>
+            <r>
+              <c>B</c>
+              <c>1</c>
+            </r>
+            <r>
+              <c>B</c>
+              <c>2</c>
+            </r>
+            <r>
+              <c>C</c>
+              <c>7</c>
+            </r>
+            <r>
+              <c>D</c>
+              <c>9</c>
+            </r>
+            <r>
+              <c>E</c>
+              <c>2</c>
+            </r>
+            <r>
+              <c>E</c>
+              <c>3</c>
+            </r>
+            <r>
+              <c>E</c>
+              <c>1</c>
+            </r>
+            <r>
+              <c>F</c>
+              <c>4</c>
+            </r>
+            <r>
+              <c>F</c>
+              <c>6</c>
+            </r>
+            <r>
+              <c>F</c>
+              <c>3</c>
+            </r>
+            <r>
+              <c>F</c>
+              <c>8</c>
+            </r>
+            <r>
+              <c>G</c>
+              <c>9</c>
+            </r>
+            <r>
+              <c>G</c>
+              <c>5</c>
+            </r>
+            <r>
+              <c>H</c>
+              <c>5</c>
+            </r>
+            <r>
+              <c>I</c>
+              <c>3</c>
+            </r>
+            <r>
+              <c>I</c>
+              <c>1</c>
+            </r>
+          </Data>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxTextInput" />
+    </Node>
+    <Node ToolID="2">
+      <GuiSettings>
+        <Position x="150" y="54" />
+      </GuiSettings>
+      <Properties>
+        <Configuration />
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+        <Dependencies>
+          <Implicit />
+        </Dependencies>
+      </Properties>
+      <EngineSettings Macro="workflow.yxmc" />
+    </Node>
+    <Node ToolID="3">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.BrowseV2.BrowseV2">
+        <Position x="270" y="42" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <TempFile>C:\Users\yoshi\AppData\Local\Temp\Engine_13896_ceb3f57ae70b4249846853e8ff468b51_\Engine_13896_ab1b32a9c4e35b439b5188f51e922d12~.yxdb</TempFile>
+          <TempFileDataProfiling />
+          <Layout>
+            <ViewMode>Single</ViewMode>
+            <ViewSize value="100" />
+            <View1>
+              <DefaultTab>Profile</DefaultTab>
+              <Hints />
+            </View1>
+            <View2 />
+          </Layout>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxBrowseV2" />
+    </Node>
+  </Nodes>
+  <Connections>
+    <Connection>
+      <Origin ToolID="1" Connection="Output" />
+      <Destination ToolID="2" Connection="Input1" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="2" Connection="Output" />
+      <Destination ToolID="3" Connection="Input" />
+    </Connection>
+  </Connections>
+  <Properties>
+    <Memory default="True" />
+    <GlobalRecordLimit value="0" />
+    <TempFiles default="True" />
+    <Annotation on="True" includeToolName="False" />
+    <ConvErrorLimit value="10" />
+    <ConvErrorLimit_Stop value="False" />
+    <CancelOnError value="False" />
+    <DisableBrowse value="False" />
+    <EnablePerformanceProfiling value="False" />
+    <RunWithE2 value="True" />
+    <PredictiveToolsCodePage value="1252" />
+    <DisableAllOutput value="False" />
+    <ShowAllMacroMessages value="False" />
+    <ShowConnectionStatusIsOn value="True" />
+    <ShowConnectionStatusOnlyWhenRunning value="True" />
+    <ZoomLevel value="0" />
+    <LayoutType>Horizontal</LayoutType>
+    <IsTemplate value="False" />
+    <MetaInfo>
+      <NameIsFileName value="True" />
+      <Name>workflow</Name>
+      <Description />
+      <RootToolName />
+      <ToolVersion />
+      <ToolInDb value="False" />
+      <CategoryName />
+      <SearchTags />
+      <Author />
+      <Company />
+      <Copyright />
+      <DescriptionLink actual="" displayed="" />
+      <Example>
+        <Description />
+        <File />
+      </Example>
+      <WorkflowId value="7309b027-a36f-413b-bd40-cd629dcbafef" />
+      <Telemetry>
+        <PreviousWorkflowId value="548d3f40-27ed-4d45-adac-1d0775a367a1" />
+        <OriginWorkflowId value="548d3f40-27ed-4d45-adac-1d0775a367a1" />
+      </Telemetry>
+      <PlatformWorkflowId value="" />
+    </MetaInfo>
+    <Events>
+      <Enabled value="True" />
+    </Events>
+  </Properties>
+</AlteryxDocument>

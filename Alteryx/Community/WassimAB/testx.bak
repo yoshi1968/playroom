@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<AlteryxDocument yxmdVer="2023.2" RunE2="T">
+  <Nodes>
+    <Node ToolID="1">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+        <Position x="150" y="7686" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <FormulaFields>
+            <FormulaField expression="&quot;BO&quot;" field="Source X" size="255" type="V_String" />
+            <FormulaField expression="IIF(IsNull([MIS Date]) OR IsNull([Maturity Date]), 0, DateTimeDiff([Maturity Date], [MIS Date], &quot;days&quot;))" field="# of Days" size="8" type="Double" />
+            <FormulaField expression="IIF(&#xA;[Product Code] = &quot;MDAC&quot;,&#xA;&quot;Over 3 Years&quot;,&#xA;IIF(&#xA;  IsNull([Maturity Date]),&#xA;  &quot;Less than 3 Months&quot;,&#xA;  IIF(&#xA;   DateTimeDiff([Maturity Date], [MIS Date], &quot;months&quot;) = 0,&#xA;   &quot;Less than 3 Months&quot;,&#xA;   IIF(&#xA;    DateTimeDiff([Maturity Date], [MIS Date], &quot;months&quot;) &lt; 3,&#xA;    &quot;Less than 3 Months&quot;,&#xA;    IIF(&#xA;     DateTimeDiff([Maturity Date], [MIS Date], &quot;months&quot;) &gt;= 3 AND DateTimeDiff([Maturity Date], [MIS Date], &quot;months&quot;) &lt; 6,&#xA;     &quot;3 Months to Less than 6 Months&quot;,&#xA;     IIF(&#xA;      DateTimeDiff([Maturity Date], [MIS Date], &quot;months&quot;) &gt;= 6 AND DateTimeDiff([Maturity Date], [MIS Date], &quot;months&quot;) &lt; 12,&#xA;      &quot;6 Months to Less than 1 Year&quot;,&#xA;      IIF(&#xA;       DateTimeDiff([Maturity Date], [MIS Date], &quot;months&quot;) &gt;= 12 AND DateTimeDiff([Maturity Date], [MIS Date], &quot;months&quot;) &lt; 36,&#xA;       &quot;1 Year to Less than 3 Years&quot;,&#xA;       &quot;Over 3 Years&quot;&#xA;      )&#xA;     )&#xA;    )&#xA;   )&#xA;  )&#xA;)&#xA;)" field="Maturity Profile" size="255" type="V_String" />
+            <FormulaField expression="IF IsNull([Interest Rate]) OR [Interest Rate] = 0 THEN &quot;Zero IR&quot;&#xA;ELSEIF [Interest Rate] &lt; 1 THEN &quot;Less than 1%&quot;&#xA;ELSEIF [Interest Rate] &gt;= 1 AND [Interest Rate] &lt; 3 THEN &quot;1% up to 3%&quot;&#xA;ELSEIF [Interest Rate] &gt;= 3 AND [Interest Rate] &lt; 5 THEN &quot;3% up to 5%&quot;&#xA;ELSEIF [Interest Rate] &gt;= 5 AND [Interest Rate] &lt; 7 THEN &quot;5% up to 7%&quot;&#xA;ELSE &quot;7% and above&quot;&#xA;ENDIF" field="Rate Range" size="255" type="V_String" />
+          </FormulaFields>
+        </Configuration>
+        <Annotation DisplayMode="2">
+          <Name />
+          <AnnotationText>x</AnnotationText>
+          <DefaultAnnotationText>Source X = "BO"
+# of Days = IIF(IsNull([MIS Date]) OR IsNull([Maturity Date]), 0...</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+    </Node>
+  </Nodes>
+  <Connections />
+  <Properties>
+    <Memory default="True" />
+    <GlobalRecordLimit value="0" />
+    <TempFiles default="True" />
+    <Annotation on="True" includeToolName="False" />
+    <ConvErrorLimit value="10" />
+    <ConvErrorLimit_Stop value="False" />
+    <CancelOnError value="False" />
+    <DisableBrowse value="False" />
+    <EnablePerformanceProfiling value="False" />
+    <RunWithE2 value="True" />
+    <PredictiveToolsCodePage value="1252" />
+    <DisableAllOutput value="False" />
+    <ShowAllMacroMessages value="False" />
+    <ShowConnectionStatusIsOn value="True" />
+    <ShowConnectionStatusOnlyWhenRunning value="True" />
+    <ZoomLevel value="0" />
+    <LayoutType>Horizontal</LayoutType>
+    <MetaInfo>
+      <NameIsFileName value="True" />
+      <Name>testx</Name>
+      <Description />
+      <RootToolName />
+      <ToolVersion />
+      <ToolInDb value="False" />
+      <CategoryName />
+      <SearchTags />
+      <Author />
+      <Company />
+      <Copyright />
+      <DescriptionLink actual="" displayed="" />
+      <Example>
+        <Description />
+        <File />
+      </Example>
+      <WorkflowId value="aa0a0b6b-9557-4a9c-8b7a-21db814f4cba" />
+      <Telemetry>
+        <PreviousWorkflowId value="1f022fca-f957-4f0e-87d7-65f171ed3652" />
+        <OriginWorkflowId value="1f022fca-f957-4f0e-87d7-65f171ed3652" />
+      </Telemetry>
+      <PlatformWorkflowId value="" />
+    </MetaInfo>
+    <Events>
+      <Enabled value="True" />
+    </Events>
+  </Properties>
+</AlteryxDocument>
