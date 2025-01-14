@@ -1,134 +1,31 @@
 <?xml version="1.0"?>
-<AlteryxDocument yxmdVer="2024.1" RunE2="T">
+<AlteryxDocument yxmdVer="2023.2" RunE2="T">
   <Nodes>
-    <Node ToolID="2">
-      <GuiSettings Plugin="AlteryxBasePluginsGui.TextInput.TextInput">
-        <Position x="66" y="66" />
-      </GuiSettings>
-      <Properties>
-        <Configuration>
-          <NumRows value="13" />
-          <Fields>
-            <Field name="MIS Date" />
-            <Field name="Maturity Date" />
-          </Fields>
-          <Data>
-            <r>
-              <c>2024-12-31</c>
-              <c>2025-02-28</c>
-            </r>
-            <r>
-              <c>2024-12-31</c>
-              <c>2025-03-31</c>
-            </r>
-            <r>
-              <c>2024-12-31</c>
-              <c>2025-04-01</c>
-            </r>
-            <r>
-              <c>2024-12-31</c>
-              <c>2025-04-30</c>
-            </r>
-            <r>
-              <c>2024-12-31</c>
-              <c>2025-05-01</c>
-            </r>
-            <r>
-              <c>2024-12-31</c>
-              <c>2025-05-31</c>
-            </r>
-            <r>
-              <c>2024-12-31</c>
-              <c>2025-06-30</c>
-            </r>
-            <r>
-              <c>2024-12-31</c>
-              <c>2025-07-01</c>
-            </r>
-            <r>
-              <c>2024-12-31</c>
-              <c>2025-07-31</c>
-            </r>
-            <r>
-              <c>2024-12-31</c>
-              <c>2025-12-31</c>
-            </r>
-            <r>
-              <c>2024-12-31</c>
-              <c>2026-01-01</c>
-            </r>
-            <r>
-              <c>2024-12-31</c>
-              <c>2027-12-31</c>
-            </r>
-            <r>
-              <c>2024-12-31</c>
-              <c>2028-01-01</c>
-            </r>
-          </Data>
-        </Configuration>
-        <Annotation DisplayMode="0">
-          <Name />
-          <DefaultAnnotationText />
-          <Left value="False" />
-        </Annotation>
-      </Properties>
-      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxTextInput" />
-    </Node>
-    <Node ToolID="3">
+    <Node ToolID="1">
       <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
-        <Position x="174" y="66" />
+        <Position x="150" y="7686" />
       </GuiSettings>
       <Properties>
         <Configuration>
           <FormulaFields>
-            <FormulaField expression="DateTimeDiff(&#xA;  DateTimeAdd([Maturity Date], -1, &quot;day&quot;),&#xA;  [MIS Date],&quot;month&quot;)" field="# of Months" size="2" type="Int16" enabled="true" />
+            <FormulaField expression="&quot;BO&quot;" field="Source X" size="255" type="V_String" />
+            <FormulaField expression="IIF(IsNull([MIS Date]) OR IsNull([Maturity Date]), 0, DateTimeDiff([Maturity Date], [MIS Date], &quot;days&quot;))" field="# of Days" size="8" type="Double" />
+            <FormulaField expression="IIF(&#xA;[Product Code] = &quot;MDAC&quot;,&#xA;&quot;Over 3 Years&quot;,&#xA;IIF(&#xA;  IsNull([Maturity Date]),&#xA;  &quot;Less than 3 Months&quot;,&#xA;  IIF(&#xA;   DateTimeDiff([Maturity Date], [MIS Date], &quot;months&quot;) = 0,&#xA;   &quot;Less than 3 Months&quot;,&#xA;   IIF(&#xA;    DateTimeDiff([Maturity Date], [MIS Date], &quot;months&quot;) &lt; 3,&#xA;    &quot;Less than 3 Months&quot;,&#xA;    IIF(&#xA;     DateTimeDiff([Maturity Date], [MIS Date], &quot;months&quot;) &gt;= 3 AND DateTimeDiff([Maturity Date], [MIS Date], &quot;months&quot;) &lt; 6,&#xA;     &quot;3 Months to Less than 6 Months&quot;,&#xA;     IIF(&#xA;      DateTimeDiff([Maturity Date], [MIS Date], &quot;months&quot;) &gt;= 6 AND DateTimeDiff([Maturity Date], [MIS Date], &quot;months&quot;) &lt; 12,&#xA;      &quot;6 Months to Less than 1 Year&quot;,&#xA;      IIF(&#xA;       DateTimeDiff([Maturity Date], [MIS Date], &quot;months&quot;) &gt;= 12 AND DateTimeDiff([Maturity Date], [MIS Date], &quot;months&quot;) &lt; 36,&#xA;       &quot;1 Year to Less than 3 Years&quot;,&#xA;       &quot;Over 3 Years&quot;&#xA;      )&#xA;     )&#xA;    )&#xA;   )&#xA;  )&#xA;)&#xA;)" field="Maturity Profile" size="255" type="V_String" />
+            <FormulaField expression="IF IsNull([Interest Rate]) OR [Interest Rate] = 0 THEN &quot;Zero IR&quot;&#xA;ELSEIF [Interest Rate] &lt; 1 THEN &quot;Less than 1%&quot;&#xA;ELSEIF [Interest Rate] &gt;= 1 AND [Interest Rate] &lt; 3 THEN &quot;1% up to 3%&quot;&#xA;ELSEIF [Interest Rate] &gt;= 3 AND [Interest Rate] &lt; 5 THEN &quot;3% up to 5%&quot;&#xA;ELSEIF [Interest Rate] &gt;= 5 AND [Interest Rate] &lt; 7 THEN &quot;5% up to 7%&quot;&#xA;ELSE &quot;7% and above&quot;&#xA;ENDIF" field="Rate Range" size="255" type="V_String" />
           </FormulaFields>
         </Configuration>
-        <Annotation DisplayMode="0">
+        <Annotation DisplayMode="2">
           <Name />
-          <AnnotationText># of Days
-# of Months</AnnotationText>
-          <DefaultAnnotationText># of Months = DateTimeDiff(
-  DateTimeAdd([Maturity Date], -1, "day"),
-  [MIS Da...</DefaultAnnotationText>
-          <Left value="False" />
-        </Annotation>
-      </Properties>
-      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
-    </Node>
-    <Node ToolID="4">
-      <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
-        <Position x="270" y="66" />
-      </GuiSettings>
-      <Properties>
-        <Configuration>
-          <FormulaFields>
-            <FormulaField expression="IF [# of Months] &lt; 3&#xA;THEN &quot;Less than 3 months&quot;&#xA;ELSEIF [# of Months] &lt; 6&#xA;THEN &quot;3 months to Less than 6 momths&quot;&#xA;ELSEIF [# of Months] &lt; 12&#xA;THEN &quot;6 months to Less than 1 year&quot;&#xA;ELSEIF [# of Months] &lt; 36&#xA;THEN &quot;1 year to Less than 3 years&quot;&#xA;ELSE &quot;Over 3 years&quot;&#xA;ENDIF" field="Maturity Profile" size="1073741823" type="V_WString" enabled="true" />
-          </FormulaFields>
-        </Configuration>
-        <Annotation DisplayMode="0">
-          <Name />
-          <AnnotationText>Maturity Profile</AnnotationText>
-          <DefaultAnnotationText>Maturity Profile = IF [# of Months] &lt; 3
-THEN "Less than 3 months"
-ELSEIF [# of M...</DefaultAnnotationText>
+          <AnnotationText>x</AnnotationText>
+          <DefaultAnnotationText>Source X = "BO"
+# of Days = IIF(IsNull([MIS Date]) OR IsNull([Maturity Date]), 0...</DefaultAnnotationText>
           <Left value="False" />
         </Annotation>
       </Properties>
       <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
     </Node>
   </Nodes>
-  <Connections>
-    <Connection>
-      <Origin ToolID="2" Connection="Output" />
-      <Destination ToolID="3" Connection="Input" />
-    </Connection>
-    <Connection>
-      <Origin ToolID="3" Connection="Output" />
-      <Destination ToolID="4" Connection="Input" />
-    </Connection>
-  </Connections>
+  <Connections />
   <Properties>
     <Memory default="True" />
     <GlobalRecordLimit value="0" />
@@ -147,7 +44,6 @@ ELSEIF [# of M...</DefaultAnnotationText>
     <ShowConnectionStatusOnlyWhenRunning value="True" />
     <ZoomLevel value="0" />
     <LayoutType>Horizontal</LayoutType>
-    <IsTemplate value="False" />
     <MetaInfo>
       <NameIsFileName value="True" />
       <Name>testx</Name>

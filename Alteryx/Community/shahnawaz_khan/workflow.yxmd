@@ -96,8 +96,6 @@ Query=`Sheet1$`</DefaultAnnotationText>
           <Expression_Init>Left([Created On], 10)</Expression_Init>
           <Expression_Cond>[date] &lt;= Left([Close Date], 10)</Expression_Cond>
           <Expression_Loop>DateTimeAdd([date], 1, "day")</Expression_Loop>
-          <RecordCount value="9" />
-          <RecordCount value="135880" />
         </Configuration>
         <Annotation DisplayMode="0">
           <Name />
@@ -122,6 +120,9 @@ Query=`Sheet1$`</DefaultAnnotationText>
         </Configuration>
         <Annotation DisplayMode="0">
           <Name />
+          <AnnotationText>isSunday
+
+secondsInRange</AnnotationText>
           <DefaultAnnotationText>isSunday = DateTimeFormat([date],"%a") = "Sun"
 secondsInRange = IF [isSunday] TH...</DefaultAnnotationText>
           <Left value="False" />
@@ -165,6 +166,10 @@ secondsInRange = IF [isSunday] TH...</DefaultAnnotationText>
         </Configuration>
         <Annotation DisplayMode="0">
           <Name />
+          <AnnotationText>hh
+mm
+ss
+totalHours</AnnotationText>
           <DefaultAnnotationText>hh = FLOOR([secondsInRange] / 3600)
 mm = FLOOR([secondsInRange] / 60) - [hh] * 6...</DefaultAnnotationText>
           <Left value="False" />

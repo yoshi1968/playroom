@@ -1,0 +1,177 @@
+<?xml version="1.0"?>
+<AlteryxDocument yxmdVer="2024.1" RunE2="T">
+  <Nodes>
+    <Node ToolID="2">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.TextInput.TextInput">
+        <Position x="54" y="54" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <NumRows value="13" />
+          <Fields>
+            <Field name="MIS Date" />
+            <Field name="Maturity Date" />
+          </Fields>
+          <Data>
+            <r>
+              <c>2024-12-31</c>
+              <c>2025-02-28</c>
+            </r>
+            <r>
+              <c>2024-12-31</c>
+              <c>2025-03-31</c>
+            </r>
+            <r>
+              <c>2024-12-31</c>
+              <c>2025-04-01</c>
+            </r>
+            <r>
+              <c>2024-12-31</c>
+              <c>2025-04-30</c>
+            </r>
+            <r>
+              <c>2024-12-31</c>
+              <c>2025-05-01</c>
+            </r>
+            <r>
+              <c>2024-12-31</c>
+              <c>2025-05-31</c>
+            </r>
+            <r>
+              <c>2024-12-31</c>
+              <c>2025-06-30</c>
+            </r>
+            <r>
+              <c>2024-12-31</c>
+              <c>2025-07-01</c>
+            </r>
+            <r>
+              <c>2024-12-31</c>
+              <c>2025-07-31</c>
+            </r>
+            <r>
+              <c>2024-12-31</c>
+              <c>2025-12-31</c>
+            </r>
+            <r>
+              <c>2024-12-31</c>
+              <c>2026-01-01</c>
+            </r>
+            <r>
+              <c>2024-12-31</c>
+              <c>2027-12-31</c>
+            </r>
+            <r>
+              <c>2024-12-31</c>
+              <c>2028-01-01</c>
+            </r>
+          </Data>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxTextInput" />
+    </Node>
+    <Node ToolID="3">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+        <Position x="162" y="54" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <FormulaFields>
+            <FormulaField expression="DateTimeDiff([Maturity Date],[MIS Date],&quot;day&quot;)" field="# of Days" size="2" type="Int16" enabled="true" />
+          </FormulaFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <AnnotationText># of Days
+# of Months</AnnotationText>
+          <DefaultAnnotationText><![CDATA[# of Days = DateTimeDiff([Maturity Date],[MIS Date],"day")
+]]></DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+    </Node>
+    <Node ToolID="4">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+        <Position x="258" y="54" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <FormulaFields>
+            <FormulaField expression="IF [# of Days] &lt; 91 THEN &quot;Less than 3 months&quot;&#xA;ELSEIF [# of Days] &lt; 182 THEN &quot;3 months to Less than 6 momths&quot;&#xA;ELSEIF [# of Days] &lt; 366 THEN &quot;6 months to Less than 1 year&quot;&#xA;ELSEIF [# of Days] &lt; 1096 THEN &quot;1 year to Less than 3 years&quot;&#xA;ELSE &quot;Over 3 years&quot;&#xA;ENDIF" field="Maturity Profile" size="1073741823" type="V_WString" enabled="true" />
+          </FormulaFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <AnnotationText>Maturity Profile</AnnotationText>
+          <DefaultAnnotationText>Maturity Profile = IF [# of Days] &lt; 91 THEN "Less than 3 months"
+ELSEIF [# of Da...</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+    </Node>
+  </Nodes>
+  <Connections>
+    <Connection>
+      <Origin ToolID="2" Connection="Output" />
+      <Destination ToolID="3" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="3" Connection="Output" />
+      <Destination ToolID="4" Connection="Input" />
+    </Connection>
+  </Connections>
+  <Properties>
+    <Memory default="True" />
+    <GlobalRecordLimit value="0" />
+    <TempFiles default="True" />
+    <Annotation on="True" includeToolName="False" />
+    <ConvErrorLimit value="10" />
+    <ConvErrorLimit_Stop value="False" />
+    <CancelOnError value="False" />
+    <DisableBrowse value="False" />
+    <EnablePerformanceProfiling value="False" />
+    <RunWithE2 value="True" />
+    <PredictiveToolsCodePage value="1252" />
+    <DisableAllOutput value="False" />
+    <ShowAllMacroMessages value="False" />
+    <ShowConnectionStatusIsOn value="True" />
+    <ShowConnectionStatusOnlyWhenRunning value="True" />
+    <ZoomLevel value="0" />
+    <LayoutType>Horizontal</LayoutType>
+    <IsTemplate value="False" />
+    <MetaInfo>
+      <NameIsFileName value="True" />
+      <Name>testx</Name>
+      <Description />
+      <RootToolName />
+      <ToolVersion />
+      <ToolInDb value="False" />
+      <CategoryName />
+      <SearchTags />
+      <Author />
+      <Company />
+      <Copyright />
+      <DescriptionLink actual="" displayed="" />
+      <Example>
+        <Description />
+        <File />
+      </Example>
+      <WorkflowId value="aa0a0b6b-9557-4a9c-8b7a-21db814f4cba" />
+      <Telemetry>
+        <PreviousWorkflowId value="1f022fca-f957-4f0e-87d7-65f171ed3652" />
+        <OriginWorkflowId value="1f022fca-f957-4f0e-87d7-65f171ed3652" />
+      </Telemetry>
+      <PlatformWorkflowId value="" />
+    </MetaInfo>
+    <Events>
+      <Enabled value="True" />
+    </Events>
+  </Properties>
+</AlteryxDocument>
